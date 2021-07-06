@@ -7,17 +7,21 @@ on:
 jobs:
   on-success:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
-    run: |
-      curl -n -X POST https://webhooks.datocms.com/fc4df1f556/deploy-results \
-      -H 'Content-Type: application/json' \
-      -d '{ "status": "success" }'
+    steps:
+      - name: On Success
+        if: ${{ github.event.workflow_run.conclusion == 'success' }}
+        run: |
+          curl -n -X POST https://webhooks.datocms.com/fc4df1f556/deploy-results \
+          -H 'Content-Type: application/json' \
+          -d '{ "status": "success" }'
   on-failure:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
-    run: |
-      curl -n -X POST https://webhooks.datocms.com/fc4df1f556/deploy-results \
-      -H 'Content-Type: application/json' \
-      -d '{ "status": "error" }'
+    steps:
+      - name: On Failure
+        if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+        run: |
+          curl -n -X POST https://webhooks.datocms.com/fc4df1f556/deploy-results \
+          -H 'Content-Type: application/json' \
+          -d '{ "status": "error" }'
   
     
