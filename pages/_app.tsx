@@ -1,10 +1,15 @@
 import '../styles/globals.css'
 import { ChakraProvider } from "@chakra-ui/react"
+import theme from './../theme'
+import { Header } from '../components/molecules/Header'
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
-      <Component {...pageProps} />
+    <ChakraProvider theme={theme}>
+      <Header />
+      <div className="container al">
+        <Component {...pageProps} />
+      </div>
     </ChakraProvider>)
 }
 

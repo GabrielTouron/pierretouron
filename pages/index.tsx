@@ -1,5 +1,6 @@
 import { request } from "../lib/datocms";
 import { Box, Flex, Heading } from "@chakra-ui/react"
+import { Header } from "../components/molecules/Header";
 
 const HOMEPAGE_QUERY = `query MyQuery {
   allProducts {
@@ -21,14 +22,14 @@ export async function getStaticProps() {
 export default function Home({ data }) {
   return (
     <>
-    <Box>
-      <Flex>
-        <Heading alignContent='center'>Catalogue</Heading>
-      </Flex>
-    </Box>
-    <Box>
-      {JSON.stringify(data, null, 2)}
-    </Box>
-  </>
+      <Box>
+        <Flex>
+          <Heading alignContent='center'>Catalogue</Heading>
+        </Flex>
+      </Box>
+      <Box>
+        {JSON.stringify(data, null, 2)}
+      </Box>
+    </>
   );
 }
