@@ -1,18 +1,15 @@
 import { Heading } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { Header } from "../../components/molecules/Header";
+import { request } from "../../lib/datocms";
 
-interface CatalogProps {
-
-}
-
-const Product = () => {
+const Product = ({ data }) => {
   const router = useRouter()
 
   return (
     <>
       <Heading>Produit {router.query.slug}</Heading>
+      {/* <div>{data.name}</div> */}
     </>
   )
 

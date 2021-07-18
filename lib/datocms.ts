@@ -2,7 +2,7 @@ import { GraphQLClient } from "graphql-request";
 
 export interface GraphQLRequest {
   query: string;
-  variables: Object;
+  variables?: Object;
   preview?: string;
 }
 
