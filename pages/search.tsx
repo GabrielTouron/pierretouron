@@ -15,10 +15,12 @@ import {
   Stack,
   Text,
   VStack,
-  Image
+  Image,
+  Badge
 
 } from "@chakra-ui/react"
 import { useRouter } from "next/router";
+import { Product } from "../components/molecules/Product";
 
 
 const HOMEPAGE_QUERY = `query MyQuery {
@@ -41,6 +43,7 @@ const HOMEPAGE_QUERY = `query MyQuery {
   allProductCategories {
     name
     id
+    order
   }
 }`;
 
@@ -76,30 +79,33 @@ export default function Search({data}) {
 
   const displayProduct = () => {
     const {category, sort} = router.query
+    
     let products = !!category ? data.allProducts.filter(p => p.categories[0].name === category) : data.allProducts
     
     products = sort === 'price desc' ? products.sort((a, b) => a.price + b.price) : products
     products = sort === 'price asc' ? products.sort((a, b) => a.price - b.price) : products
-    products = sort === 'new' ? products.sort((a, b) => a.createdAt + b.createdAt) : products
-
-    console.log(products);
-    
+    products = sort === 'new' ? products.sort((a, b) => a.createdAt + b.createdAt) : products    
 
     return products
+  }
+
+  const sortCategories = () => {
+    
+    const categories =  data.allProductCategories.sort((a, b) => a.order - b.order)
+    console.log(categories);
+    return categories
   }
 
 
   return (
     <>
-      <Box my="20px">
-        <Flex>
-          <Heading alignContent='center'>Catalogue</Heading>
-        </Flex>
-      </Box>
-      <Box my="20px">
+      <Center my="20px">
+        <Heading alignContent='center'>Catalogue</Heading>
+      </Center>
+      <Box mt="50px">
         <Flex justifyContent="space-between">
           <Box>
-            {data.allProductCategories.map(i => (
+            {sortCategories().map(i => (
               <Button m="5px" key={i.id} onClick={() => filter({category: i.name})}>{i.name}</Button>
               )
             )}
@@ -125,42 +131,18 @@ export default function Search({data}) {
           </Stack>
         </Flex>
       </Box>
-      <Box my="70px">
+      <Box my="50px">
         <Grid templateColumns="repeat(3, 1fr)" gap={1} >
           {displayProduct().map(p => (
-            <Center 
-              as="button"
-              p='20px'
+            <Product 
               key={p.id}
-              transition="0.5s"
-              onClick={() => router.push(`/product/${p.name}`)}
-              _hover={{
-                boxShadow: '2xl',
-                borderRadius: '25px'
-              }}
-            >
-              <VStack pt={10} align={'center'}>
-              <Image
-              boxSize="300px"
-    objectFit="cover"
-    src={p.image.url}
-    alt="Segun Adebayo"
-  />
-                <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-                  {p.categories[0].name}
-                </Text>
-                <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-                  {p.name}
-                </Heading>
-                <Stack direction={'row'} align={'center'} />
-                  <Text fontWeight={800} fontSize={'xl'}>
-                    {p.price} €
-                  </Text>
-                  {/* <Text textDecoration={'line-through'} color={'gray.600'}>
-                    $199
-                  </Text> */}
-              </VStack>
-            </Center>
+              id={p.id}
+              categories={p.categories}
+              imageUrl={p.image.url}
+              name={p.name}
+              price={p.price}
+              state={p.state.name}
+            />
           ))}
         </Grid>
       </Box>
