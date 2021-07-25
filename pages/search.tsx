@@ -56,24 +56,31 @@ export async function getStaticProps() {
   return {
     props: { data }
   };
-
 }
 
 export default function Search({data}) {
   const router = useRouter()
 
+
+
   const filter = (query: any) => {
-     
-    if ((router.query.category == query.category && !!router.query.category) || query.category === 'Tout' )  {
-  
+    
+
+    const {category} = router.query
+
+
+    if ((category == query.category && !!category) || query.category === 'Tout' )  {
       const {category, ...rest} = router.query
-      router.push({query: rest});
+      router.push({pathname: '/search', query: rest})
       return
     }
 
-    const tata = router.query    
+    const oldQuery = router.query 
+
+    if(query.category !== 'Tout') {
+      router.push({query:{ ...oldQuery, ...query}})
+    }
   
-    router.push({query:{ ...tata, ...query}})
   }
 
 
