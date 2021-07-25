@@ -1,12 +1,10 @@
-import { Heading } from "@chakra-ui/react";
-import { Header } from "../components/molecules/Header";
+import { Heading } from '@chakra-ui/react'
+import { ReactElement } from 'react'
 
-export default function Blog() {
+export default function Blog(): ReactElement {
   return (
     <>
-      <Heading>
-        BLOG
-      </Heading>
+      <Heading>BLOG</Heading>
     </>
   )
 }
