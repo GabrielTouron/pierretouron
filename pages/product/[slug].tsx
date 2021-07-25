@@ -1,8 +1,28 @@
-import { Heading, Button, Box, Center, Flex, Image } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import React from "react";
-import { ButtonPrimary } from "../../components/atoms/buttons/ButtonPrimary";
-import { request } from "../../lib/datocms";
+import {
+  Heading,
+  Button,
+  Box,
+  Center,
+  Flex,
+  Image,
+  Accordion,
+  AccordionItem,
+  AccordionButton,
+  AccordionPanel,
+  AccordionIcon,
+  Badge,
+  Text,
+  Divider,
+  AlertDialog,
+  AlertDialogOverlay,
+  AlertDialogContent,
+  AlertDialogHeader,
+  AlertDialogBody,
+  AlertDialogFooter,
+} from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import React from 'react'
+import { request } from '../../lib/datocms'
 
 const PRODUCT_QUERY = `query PorductBySlug($slug: String) {
   product(filter: {name: {eq: $slug}}) {
@@ -23,60 +43,125 @@ const PRODUCT_QUERY = `query PorductBySlug($slug: String) {
 }`
 
 export async function getStaticPaths() {
-  const data = await request({ query: `{ allProducts { name } }` });
+  const data = await request({ query: `{ allProducts { name } }` })
 
   return {
     paths: data.allProducts.map((product) => `/product/${product.name}`),
     fallback: false,
-  };
+  }
 }
 
-export async function getStaticProps({params}) {
+export async function getStaticProps({ params }) {
   const data = await request({
     query: PRODUCT_QUERY,
-    variables: {slug: params.slug}
-  });
+    variables: { slug: params.slug },
+  })
 
-  console.log(data);
-  
+  console.log(data)
+
   return {
-    props: { data }
-  };
-
+    props: { data },
+  }
 }
-
 
 const Product = ({ data }) => {
   const router = useRouter()
 
+  const [isOpen, setIsOpen] = React.useState(false)
+  const onClose = () => setIsOpen(false)
+  const cancelRef = React.useRef()
 
   return (
     <>
-      <Center my="20px">
-        <Heading alignContent='center'>{data.product.name}</Heading>
-      </Center>
-      <br />
       <Box>
         <Flex justifyContent="space-between">
-          <Box width="421px" height="577px" border="1px">
-          <Image
-        boxSize="300px"
-        objectFit="cover"
-        src={data.product.image.url}
-        alt="Segun Adebayo"
-      />
+          <Box w="45%">
+            <Image
+              objectFit="cover"
+              src={data.product.image.url}
+              alt="Segun Adebayo"
+              onClick={() => setIsOpen(true)}
+              _hover={{
+                boxShadow: '2xl',
+                borderRadius: '25px',
+                cursor: 'pointer',
+              }}
+            />
           </Box>
-          <Box width="421px" height="577px">
-            <Box>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Non iste veniam quibusdam provident, beatae nemo, corrupti, reiciendis incidunt hic blanditiis quisquam. Modi nisi eos impedit ea maiores, quis deserunt fugiat.</Box>
-            <br />
-            <Box><ButtonPrimary action={()=>console.log('ajouter au panier')}>AJOUTER AU PANIER</ButtonPrimary></Box>
+          <Box w="45%" pt="10">
+            <Heading>{data.product.name}</Heading>
+            <Badge mt="3" fontSize="1.1em" colorScheme="green">
+              {data.product.state.name}
+            </Badge>
+            <Divider my="5" />
+            <Text fontWeight={800} fontSize={'2xl'} my="5">
+              {data.product.price} €
+            </Text>
+            <Box my="5">{data.product.description}</Box>
+            <Center>
+              <Button action={() => console.log('ajouter au panier')} my="10">
+                AJOUTER AU PANIER
+              </Button>
+            </Center>
+            <Box>
+              <Accordion allowMultiple>
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        Détails
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </AccordionPanel>
+                </AccordionItem>
+
+                <AccordionItem>
+                  <h2>
+                    <AccordionButton>
+                      <Box flex="1" textAlign="left">
+                        Livraison
+                      </Box>
+                      <AccordionIcon />
+                    </AccordionButton>
+                  </h2>
+                  <AccordionPanel pb={4}>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
+                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                  </AccordionPanel>
+                </AccordionItem>
+              </Accordion>
+            </Box>
+            <AlertDialog
+              isOpen={isOpen}
+              leastDestructiveRef={cancelRef}
+              onClose={onClose}
+              size="3xl"
+            >
+              <AlertDialogOverlay>
+                <AlertDialogContent w="1000">
+                  <Image
+                    objectFit="cover"
+                    src={data.product.image.url}
+                    alt="Segun Adebayo"
+                  />
+                </AlertDialogContent>
+              </AlertDialogOverlay>
+            </AlertDialog>
+            {/* </Flex> */}
           </Box>
-        </Flex> 
+        </Flex>
       </Box>
-      
     </>
   )
-
 }
 
 export default Product
