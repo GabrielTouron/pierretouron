@@ -51,7 +51,6 @@ const HOMEPAGE_QUERY = `query MyQuery {
 export async function getStaticProps() {
   const data = await request({
     query: HOMEPAGE_QUERY,
-    variables: { limit: 10 }
   });
   return {
     props: { data }
@@ -118,7 +117,7 @@ export default function Search({data}) {
           isInline>
             <Menu>
               <MenuButton as={Button} rightIcon={<ChevronDownIcon />}>
-                Trier
+                Trier woiengoiwegnewoignwoeignoig goiwngeoiengoine goingo ino
               </MenuButton>
               <MenuList minWidth="240px">
                 <MenuOptionGroup title="Order" type="radio">
