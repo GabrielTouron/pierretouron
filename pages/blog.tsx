@@ -1,7 +1,7 @@
 import { Heading } from '@chakra-ui/react'
 import { ReactElement } from 'react'
 
-export const Blog: React.FC = (): ReactElement => {
+export default function Blog(): ReactElement {
   return (
     <>
       <Heading>BLOG</Heading>
