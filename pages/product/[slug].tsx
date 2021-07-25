@@ -16,13 +16,11 @@ import {
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
-  AlertDialogHeader,
-  AlertDialogBody,
-  AlertDialogFooter,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import React from 'react'
+import { GetStaticPaths, GetStaticProps } from 'next'
+import React, { ReactElement } from 'react'
 import { request } from '../../lib/datocms'
+import { IProduct } from '../../types'
 
 const PRODUCT_QUERY = `query PorductBySlug($slug: String) {
   product(filter: {name: {eq: $slug}}) {
@@ -42,31 +40,33 @@ const PRODUCT_QUERY = `query PorductBySlug($slug: String) {
   }
 }`
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const data = await request({ query: `{ allProducts { name } }` })
 
   return {
-    paths: data.allProducts.map((product) => `/product/${product.name}`),
+    paths: data.allProducts.map(
+      (product: IProduct) => `/product/${product.name}`
+    ),
     fallback: false,
   }
 }
 
-export async function getStaticProps({ params }) {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const data = await request({
     query: PRODUCT_QUERY,
     variables: { slug: params.slug },
   })
-
-  console.log(data)
 
   return {
     props: { data },
   }
 }
 
-const Product = ({ data }) => {
-  const router = useRouter()
+type ProductRequest = {
+  data: { product: IProduct }
+}
 
+export default function Product({ data }: ProductRequest): ReactElement {
   const [isOpen, setIsOpen] = React.useState(false)
   const onClose = () => setIsOpen(false)
   const cancelRef = React.useRef()
@@ -99,7 +99,7 @@ const Product = ({ data }) => {
             </Text>
             <Box my="5">{data.product.description}</Box>
             <Center>
-              <Button action={() => console.log('ajouter au panier')} my="10">
+              <Button onClick={() => console.log('ajouter au panier')} my="10">
                 AJOUTER AU PANIER
               </Button>
             </Center>
@@ -163,5 +163,3 @@ const Product = ({ data }) => {
     </>
   )
 }
-
-export default Product

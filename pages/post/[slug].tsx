@@ -1,13 +1,8 @@
-import { Heading } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import React from "react";
-import { Header } from "../../components/molecules/Header";
+import { Heading } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import React, { ReactElement } from 'react'
 
-interface CatalogProps {
-
-}
-
-const Post = () => {
+export const Post: React.FC = (): ReactElement => {
   const router = useRouter()
 
   return (
@@ -15,7 +10,4 @@ const Post = () => {
       <Heading>Post {router.query.slug}</Heading>
     </>
   )
-
 }
-
-export default Post

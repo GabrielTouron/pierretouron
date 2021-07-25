@@ -1,17 +1,19 @@
 import '../styles/globals.css'
-import { ChakraProvider } from "@chakra-ui/react"
+import { ChakraProvider } from '@chakra-ui/react'
 import theme from './../theme'
 import { Header } from '../components/molecules/Header'
+import type { AppProps } from 'next/app'
+import { ReactElement } from 'react'
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <ChakraProvider theme={theme}>
       <Header />
       <div className="container al">
         <Component {...pageProps} />
       </div>
-    </ChakraProvider>)
+    </ChakraProvider>
+  )
 }
 
 export default MyApp
-

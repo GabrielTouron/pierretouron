@@ -1,21 +1,25 @@
-import { CopyIcon } from "@chakra-ui/icons";
-import { Box, Button, Flex, IconButton, Stack } from "@chakra-ui/react";
-import React from "react";
+import { CopyIcon } from '@chakra-ui/icons'
+import { Box, Button, Flex, IconButton, Stack } from '@chakra-ui/react'
+import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
-
-interface HeaderProps {
-
-}
-
-export const Header: React.FC<HeaderProps> = () => {
-
+export const Header: React.FC = (): ReactElement => {
   const router = useRouter()
 
   return (
     <Box bgColor="white">
-      <Flex justifyContent="space-between" className="container" m="0 auto" p="5">
-        <Button variant="ghost" size="lg" fontWeight="bold" onClick={() => router.push('/')}>
+      <Flex
+        justifyContent="space-between"
+        className="container"
+        m="0 auto"
+        p="5"
+      >
+        <Button
+          variant="ghost"
+          size="lg"
+          fontWeight="bold"
+          onClick={() => router.push('/')}
+        >
           Acceuil
         </Button>
         <Stack
@@ -25,10 +29,18 @@ export const Header: React.FC<HeaderProps> = () => {
           alignItems="center"
           isInline
         >
-          <Button variant="ghost" size="md" onClick={() => router.push('/search')}>
+          <Button
+            variant="ghost"
+            size="md"
+            onClick={() => router.push('/search')}
+          >
             Catalogue
           </Button>
-          <Button variant="ghost" size="md" onClick={() => router.push('/blog')}>
+          <Button
+            variant="ghost"
+            size="md"
+            onClick={() => router.push('/blog')}
+          >
             Blog
           </Button>
           <IconButton aria-label="icon" icon={<CopyIcon />} size="md" />
