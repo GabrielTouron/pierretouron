@@ -13,7 +13,7 @@ import { useRouter } from "next/router"
 type category = { name: string }
 
 interface ProductProps {
-  id: number
+  id: string
   name: string
   state: string
   imageUrl: string

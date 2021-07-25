@@ -21,6 +21,9 @@ import {
 } from "@chakra-ui/react"
 import { useRouter } from "next/router";
 import { Product } from "../components/molecules/Product";
+import { Category, IProduct } from "../models/product";
+import { ICategory } from "../models/category";
+
 
 
 const HOMEPAGE_QUERY = `query MyQuery {
@@ -47,6 +50,9 @@ const HOMEPAGE_QUERY = `query MyQuery {
   }
 }`;
 
+type CategoryQueryParams = { category?: string, sort?: string }
+type SearchRequest = {data: {allProducts: IProduct[], allProductCategories: ICategory[] }}
+
 
 export async function getStaticProps() {
   const data = await request({
@@ -58,48 +64,39 @@ export async function getStaticProps() {
   };
 }
 
-export default function Search({data}) {
+export default function Search({data}: SearchRequest) {
   const router = useRouter()
 
+  const filter = (query: CategoryQueryParams): void => {
+    const {category: urlCategory} = router.query
+    const {category: clickCategory} = query    
 
-
-  const filter = (query: any) => {
-    
-
-    const {category} = router.query
-
-
-    if ((category == query.category && !!category) || query.category === 'Tout' )  {
+    if ((urlCategory == clickCategory && !!urlCategory) || clickCategory === 'Tout' )  {
       const {category, ...rest} = router.query
       router.push({pathname: '/search', query: rest})
       return
     }
 
-    const oldQuery = router.query 
-
-    if(query.category !== 'Tout') {
-      router.push({query:{ ...oldQuery, ...query}})
+    if(clickCategory !== 'Tout') {
+      router.push({query:{ ...router.query, ...query}})
     }
-  
   }
 
 
-  const displayProduct = () => {
+  const displayProduct = () : IProduct[] => {
     const {category, sort} = router.query
     
-    let products = !!category ? data.allProducts.filter(p => p.categories[0].name === category) : data.allProducts
+    let products = !!category ? data.allProducts.filter((p: IProduct)  => p.categories[0].name === category) : data.allProducts
     
-    products = sort === 'price desc' ? products.sort((a, b) => a.price + b.price) : products
-    products = sort === 'price asc' ? products.sort((a, b) => a.price - b.price) : products
-    products = sort === 'new' ? products.sort((a, b) => a.createdAt + b.createdAt) : products    
+    products = sort === 'price desc' ? products.sort((a: IProduct, b: IProduct) => a.price + b.price) : products
+    products = sort === 'price asc' ? products.sort((a: IProduct, b: IProduct) => a.price - b.price) : products
+    products = sort === 'new' ? products.sort((a: any, b: any) => a.createdAt + b.createdAt) : products    
 
     return products
   }
 
-  const sortCategories = () => {
-    
-    const categories =  data.allProductCategories.sort((a, b) => a.order - b.order)
-    console.log(categories);
+  const sortCategories = () : ICategory[] => {
+    const categories =  data.allProductCategories.sort((a: ICategory , b: ICategory) => a.order - b.order)
     return categories
   }
 
