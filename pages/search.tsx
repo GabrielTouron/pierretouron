@@ -101,7 +101,7 @@ export default function Search({ data }: SearchRequest): ReactElement {
       sort === 'new'
         ? products.sort(
             (a: IProduct, b: IProduct) =>
-              a.createdAt.getTime() + b.createdAt.getTime()
+              new Date(a.createdAt).getTime() + new Date(b.createdAt).getTime()
           )
         : products
 
