@@ -78,6 +78,8 @@ export default function Search({ data }: SearchRequest): ReactElement {
     if (clickCategory !== 'Tout') {
       router.push({ query: { ...router.query, ...query } })
     }
+
+    displayProduct()
   }
 
   const displayProduct = (): IProduct[] => {
