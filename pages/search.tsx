@@ -81,10 +81,7 @@ export default function Search({ data }: SearchRequest): ReactElement {
   }
 
   const displayProduct = (): IProduct[] => {
-    const { category, sort } = router.query
-
-    console.log('je passe');
-    
+    const { category, sort } = router.query    
 
     let products = !!category
       ? data.allProducts.filter(
@@ -103,8 +100,9 @@ export default function Search({ data }: SearchRequest): ReactElement {
     products =
       sort === 'new'
         ? products.sort(
-            (a: IProduct, b: IProduct) =>
-              new Date(a.createdAt).getTime() + new Date(b.createdAt).getTime()
+            (a: IProduct, b: IProduct) => {
+              return (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : -1
+            }
           )
         : products
 
