@@ -12,7 +12,7 @@ export interface IProduct {
   categories: Category[]
   image: Image
   state: State
-  createdAt: Date
+  createdAt: string
 }
 
 export interface Category {

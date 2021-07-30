@@ -1,3 +1,4 @@
+import { ArrowBackIcon } from '@chakra-ui/icons'
 import {
   Heading,
   Button,
@@ -16,11 +17,14 @@ import {
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
+  IconButton
 } from '@chakra-ui/react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React, { ReactElement } from 'react'
 import { request } from '../../lib/datocms'
 import { IProduct } from '../../types'
+import { useRouter } from 'next/router'
+
 
 const PRODUCT_QUERY = `query PorductBySlug($slug: String) {
   product(filter: {name: {eq: $slug}}) {
@@ -70,9 +74,17 @@ export default function Product({ data }: ProductRequest): ReactElement {
   const [isOpen, setIsOpen] = React.useState(false)
   const onClose = () => setIsOpen(false)
   const cancelRef = React.useRef()
+  const router = useRouter()
 
   return (
-    <>
+      <>
+        <IconButton
+          aria-label="Back to search page"
+          size="lg"
+          my="5"
+          icon={<ArrowBackIcon />}
+          onClick={()=> router.back()}
+        />
       <Box>
         <Flex justifyContent="space-between">
           <Box w="45%">
