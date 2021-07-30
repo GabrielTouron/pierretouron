@@ -20,7 +20,7 @@ export const Header: React.FC = (): ReactElement => {
           fontWeight="bold"
           onClick={() => router.push('/')}
         >
-          Acceuil
+          Accueil
         </Button>
         <Stack
           spacing={2}

@@ -18,6 +18,7 @@ interface ProductProps {
   imageUrl: string
   categories: category[]
   price: number
+  isInHomePage?: boolean
 }
 
 export const Product: React.FC<ProductProps> = (data: ProductProps) => {
@@ -36,10 +37,17 @@ export const Product: React.FC<ProductProps> = (data: ProductProps) => {
         cursor: 'pointer',
       }}
     >
-      <VStack pt={10} align={'center'}>
-        <Badge variant="subtle" colorScheme="green">
-          {data.state}
-        </Badge>
+      <VStack align={'center'}>
+        {!data.isInHomePage ?
+          (
+            <Badge variant="subtle" colorScheme="green">
+              {data.state}
+            </Badge>
+          ) :  
+            <Badge ml="1" fontSize="1.1em" colorScheme="purple">
+             Nouveau !
+            </Badge>  
+        }
         <Image
           boxSize="300px"
           objectFit="cover"
@@ -57,9 +65,6 @@ export const Product: React.FC<ProductProps> = (data: ProductProps) => {
         <Text fontWeight={800} fontSize={'xl'}>
           {data.price} €
         </Text>
-        {/* <Text textDecoration={'line-through'} color={'gray.600'}>
-          $199
-        </Text> */}
       </VStack>
     </Center>
   )

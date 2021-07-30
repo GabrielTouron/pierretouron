@@ -20,7 +20,7 @@ import { ICategory, IProduct } from '../types'
 import { GetStaticProps } from 'next'
 import { ReactElement } from 'react'
 
-const HOMEPAGE_QUERY = `query MyQuery {
+const SEARCH_QUERY = `query MyQuery {
   allProducts {
     price
     name
@@ -51,8 +51,7 @@ type SearchRequest = {
 
 export const getStaticProps: GetStaticProps = async () => {
   const data = await request({
-    query: HOMEPAGE_QUERY,
-    variables: { limit: 10 },
+    query: SEARCH_QUERY,
   })
   return {
     props: { data },

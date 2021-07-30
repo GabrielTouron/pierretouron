@@ -26,3 +26,10 @@ export interface Image {
 export interface State {
   name: string
 }
+
+export interface HomePage {
+  allProducts: IProduct[]
+  contentHomePage: {
+    presentation: string
+  }
+}
