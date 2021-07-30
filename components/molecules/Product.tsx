@@ -30,6 +30,7 @@ export const Product: React.FC<ProductProps> = (data: ProductProps) => {
       p="20px"
       key={data.id}
       transition="0.5s"
+      borderRadius="25px"
       onClick={() => router.push(`/product/${data.name}`)}
       _hover={{
         boxShadow: '2xl',

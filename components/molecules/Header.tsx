@@ -1,13 +1,15 @@
-import { CopyIcon } from '@chakra-ui/icons'
-import { Box, Button, Flex, IconButton, Stack } from '@chakra-ui/react'
+import { CopyIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
+import { Box, Button, Flex, IconButton, Stack, useColorMode } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
 export const Header: React.FC = (): ReactElement => {
   const router = useRouter()
+  const { colorMode, toggleColorMode } = useColorMode()
+
 
   return (
-    <Box bgColor="white">
+    <Box>
       <Flex
         justifyContent="space-between"
         className="container"
@@ -43,7 +45,12 @@ export const Header: React.FC = (): ReactElement => {
           >
             Blog
           </Button>
-          <IconButton aria-label="icon" icon={<CopyIcon />} size="md" />
+          <IconButton 
+            aria-label="icon"
+            onClick={toggleColorMode}
+            icon={colorMode === "dark" ?  <SunIcon/> : <MoonIcon />}
+            size="md"
+          />
           <IconButton aria-label="icon" icon={<CopyIcon />} size="md" />
         </Stack>
       </Flex>
