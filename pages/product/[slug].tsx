@@ -93,6 +93,7 @@ export default function Product({ data }: ProductRequest): ReactElement {
               src={data.product.image.url}
               alt="Segun Adebayo"
               onClick={() => setIsOpen(true)}
+              borderRadius="25px"
               _hover={{
                 boxShadow: '2xl',
                 borderRadius: '25px',
