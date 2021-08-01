@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Heading, Button } from '@chakra-ui/react'
+import { Box, Flex, Text, Heading, Button, useColorModeValue } from '@chakra-ui/react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
@@ -20,11 +20,15 @@ const HOME_PAGE_QUERY = `query MyQuery {
     }
     state {
       name
+      colorStatus {
+        hex
+      }
+      available
     }
     createdAt
   }
   contentHomePage {
-    presentation(locale: fr)
+    textPresentation(locale: fr)
   }
 }`
 
@@ -45,30 +49,28 @@ export default function Home({data}: HomePageRequest): ReactElement {
   const router = useRouter()
   const product = data.allProducts[0]
 
+
   return (
     <>
      <Flex my="20px" flexDirection="column" alignItems="center">
-      <Heading alignContent="center" size="2xl">Pierre Touron</Heading>
-      <Box maxW="570px" m="40px">
+      <Heading alignContent="center" size="4xl" mt="8" bgGradient="linear-gradient(90deg, rgba(154,201,198,1) 0%, rgba(252,139,79,1) 35%, rgba(196,92,34,1) 100%)" bgClip="text">
+        Pierre Touron
+      </Heading>
+      <Box maxW="570px" m="30px">
         <Text>
-         {data.contentHomePage.presentation}
+         {data.contentHomePage.textPresentation}
         </Text>
       </Box>
 
       <Flex>
-        <Button mr="3" onClick={() => router.push('/search')}>
+        <Button mr="3" onClick={() => router.push('/search')} backgroundColor="secondary">
           Accéder au catalogue
         </Button>
         <Button ml="3" variant="link">Accéder au Blog --{'>'} </Button>
       </Flex>
       <Flex mt="10">      
           <Product
-            id={product.id}
-            categories={product.categories}
-            imageUrl={product.image.url}
-            name={product.name}
-            price={product.price}
-            state={product.state.name}
+            product={product}
             isInHomePage={true}
           >
           </Product>

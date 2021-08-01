@@ -1,15 +1,18 @@
 import { CopyIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { Box, Button, Flex, IconButton, Stack, useColorMode } from '@chakra-ui/react'
+import { Box, Button, Flex, Stack, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'
 
 export const Header: React.FC = (): ReactElement => {
   const router = useRouter()
   const { colorMode, toggleColorMode } = useColorMode()
+  const bg = useColorModeValue("primary", "#2D3748")
+  const navButton = useColorModeValue("blackAlpha", "white")
+
 
 
   return (
-    <Box>
+    <Box backgroundColor="primary" borderBottom="8px" borderBottomColor="primaryDark" bg={bg}>
       <Flex
         justifyContent="space-between"
         className="container"
@@ -21,6 +24,7 @@ export const Header: React.FC = (): ReactElement => {
           size="lg"
           fontWeight="bold"
           onClick={() => router.push('/')}
+          colorScheme={navButton}
         >
           Accueil
         </Button>
@@ -34,6 +38,8 @@ export const Header: React.FC = (): ReactElement => {
           <Button
             variant="ghost"
             size="md"
+            colorScheme={navButton}
+
             onClick={() => router.push('/search')}
           >
             Catalogue
@@ -41,17 +47,16 @@ export const Header: React.FC = (): ReactElement => {
           <Button
             variant="ghost"
             size="md"
+            colorScheme={navButton}
+
             onClick={() => router.push('/blog')}
           >
             Blog
           </Button>
-          <IconButton 
-            aria-label="icon"
-            onClick={toggleColorMode}
-            icon={colorMode === "dark" ?  <SunIcon/> : <MoonIcon />}
-            size="md"
-          />
-          <IconButton aria-label="icon" icon={<CopyIcon />} size="md" />
+          {colorMode === "dark" ?
+            <SunIcon onClick={toggleColorMode} size="md"/> :
+            <MoonIcon onClick={toggleColorMode} size="md"/>
+          }
         </Stack>
       </Flex>
     </Box>

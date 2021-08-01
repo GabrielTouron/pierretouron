@@ -34,8 +34,19 @@ const SEARCH_QUERY = `query MyQuery {
     }
     state {
       name
+      colorStatus {
+        hex
+      }
+      available
     }
     createdAt
+    shipping
+    productTechnique {
+      name
+    }
+    productDetail {
+      name
+    }
   }
   allProductCategories {
     name
@@ -118,7 +129,7 @@ export default function Search({ data }: SearchRequest): ReactElement {
   return (
     <>
       <Center my="20px">
-        <Heading alignContent="center">Catalogue</Heading>
+        <Heading alignContent="center" mt="8">Catalogue</Heading>
       </Center>
       <Box mt="50px">
         <Flex justifyContent="space-between">
@@ -171,16 +182,11 @@ export default function Search({ data }: SearchRequest): ReactElement {
         </Flex>
       </Box>
       <Box my="50px">
-        <Grid templateColumns="repeat(3, 1fr)" gap={1}>
+        <Grid templateColumns="repeat(3, 1fr)" gap={10}>
           {displayProduct().map((p) => (
             <Product
               key={p.id}
-              id={p.id}
-              categories={p.categories}
-              imageUrl={p.image.url}
-              name={p.name}
-              price={p.price}
-              state={p.state.name}
+              product={p}
             />
           ))}
         </Grid>

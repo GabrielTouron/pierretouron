@@ -28,11 +28,8 @@ import { useRouter } from 'next/router'
 
 const PRODUCT_QUERY = `query PorductBySlug($slug: String) {
   product(filter: {name: {eq: $slug}}) {
-    name
     price
-    state {
-      name
-    }
+    name
     description
     id
     categories {
@@ -40,6 +37,21 @@ const PRODUCT_QUERY = `query PorductBySlug($slug: String) {
     }
     image {
       url
+    }
+    state {
+      name
+      colorStatus {
+        hex
+      }
+      available
+    }
+    createdAt
+    shipping
+    productTechnique {
+      name
+    }
+    productDetail {
+      name
     }
   }
 }`
@@ -110,7 +122,10 @@ export default function Product({ data }: ProductRequest): ReactElement {
             <Text fontWeight={800} fontSize={'2xl'} my="5">
               {data.product.price} €
             </Text>
-            <Box my="5">{data.product.description}</Box>
+            <Box my="5">{data.product.productTechnique.name}
+            <br/>
+            {data.product.productDetail.name}
+            </Box>
             <Center>
               <Button onClick={() => console.log('ajouter au panier')} my="10">
                 AJOUTER AU PANIER
@@ -122,33 +137,13 @@ export default function Product({ data }: ProductRequest): ReactElement {
                   <h2>
                     <AccordionButton>
                       <Box flex="1" textAlign="left">
-                        Détails
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </AccordionPanel>
-                </AccordionItem>
-
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton>
-                      <Box flex="1" textAlign="left">
                         Livraison
                       </Box>
                       <AccordionIcon />
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    {data.product.shipping}
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>
