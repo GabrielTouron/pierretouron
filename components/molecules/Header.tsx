@@ -1,4 +1,4 @@
-import { CopyIcon, MoonIcon, SunIcon } from '@chakra-ui/icons'
+import {  MoonIcon, SunIcon } from '@chakra-ui/icons'
 import { Box, Button, Flex, Stack, useColorMode, useColorModeValue } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
 import { useRouter } from 'next/router'

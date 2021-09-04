@@ -6,7 +6,6 @@ import {
   VStack,
   Image,
   Badge,
-  Button,
   useColorModeValue,
   Flex,
 } from '@chakra-ui/react'
@@ -14,8 +13,6 @@ import { useRouter } from 'next/router'
 import React from 'react'
 import { CircleIcon } from '../../icons/circle'
 import { IProduct } from '../../types'
-
-type category = { name: string }
 
 interface ProductProps {
   product: IProduct

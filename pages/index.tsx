@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Heading, Button, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Text, Heading, Button } from '@chakra-ui/react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
