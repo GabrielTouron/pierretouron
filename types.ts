@@ -13,6 +13,10 @@ export interface IProduct {
   image: Image
   state: State
   createdAt: string
+  shipping: string
+  productTechnique: {name: string}
+  productDetail: {name: string}
+
 }
 
 export interface Category {
@@ -25,11 +29,12 @@ export interface Image {
 
 export interface State {
   name: string
+  colorStatus: any
 }
 
 export interface HomePage {
   allProducts: IProduct[]
   contentHomePage: {
-    presentation: string
+    textPresentation: string
   }
 }

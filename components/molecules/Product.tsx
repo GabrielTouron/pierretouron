@@ -6,65 +6,69 @@ import {
   VStack,
   Image,
   Badge,
+  useColorModeValue,
+  Flex,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-
-type category = { name: string }
+import React from 'react'
+import { CircleIcon } from '../../icons/circle'
+import { IProduct } from '../../types'
 
 interface ProductProps {
-  id: string
-  name: string
-  state: string
-  imageUrl: string
-  categories: category[]
-  price: number
+  product: IProduct
   isInHomePage?: boolean
 }
 
-export const Product: React.FC<ProductProps> = (data: ProductProps) => {
+export const Product: React.FC<ProductProps> = ({product, isInHomePage}: ProductProps) => {
   const router = useRouter()
+  const {hex} = product.state.colorStatus
+  const navButton = useColorModeValue("black", "black")
 
   return (
     <Center
       as="button"
       p="20px"
-      key={data.id}
+      backgroundColor="white"
+      key={product.id}
       transition="0.5s"
-      borderRadius="25px"
-      onClick={() => router.push(`/product/${data.name}`)}
+      onClick={() => router.push(`/product/${product.name}`)}
       _hover={{
         boxShadow: '2xl',
-        borderRadius: '25px',
         cursor: 'pointer',
       }}
     >
       <VStack align={'center'}>
-        {!data.isInHomePage ?
+        {!isInHomePage ?
           (
-            <Badge variant="subtle" colorScheme="green">
-              {data.state}
-            </Badge>
+            <Flex>
+              <Badge variant="subtle" marginRight="2">
+                {product.state.name}
+              </Badge>
+              <CircleIcon boxSize={4} color={hex}  />
+            </Flex>
+
           ) :  
-            <Badge ml="1" fontSize="1.1em" colorScheme="purple">
+            <Badge ml="1" fontSize="1.1em" color={navButton}>
              Nouveau !
-            </Badge>  
+            </Badge>
+  
         }
         <Image
           boxSize="300px"
           objectFit="cover"
-          src={data.imageUrl}
+          src={product.image.url}
           alt="Segun Adebayo"
         />
 
-        <Text color={'gray.500'} fontSize={'sm'} textTransform={'uppercase'}>
-          {data.categories[0].name}
+        <Text color="black" fontSize={'sm'} textTransform={'uppercase'}>
+          {product.categories[0].name}
         </Text>
-        <Heading fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
-          {data.name}
+        <Heading color="black" fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
+          {product.name}
         </Heading>
         <Stack direction={'row'} align={'center'} />
-        <Text fontWeight={800} fontSize={'xl'}>
-          {data.price} €
+        <Text fontWeight={800} fontSize={'xl'} color="black">
+          {product.price} €
         </Text>
       </VStack>
     </Center>
