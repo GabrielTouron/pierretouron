@@ -8,9 +8,11 @@ import {
   Badge,
   Button,
   useColorModeValue,
+  Flex,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { CircleIcon } from '../../icons/circle'
 import { IProduct } from '../../types'
 
 type category = { name: string }
@@ -32,24 +34,27 @@ export const Product: React.FC<ProductProps> = ({product, isInHomePage}: Product
       backgroundColor="white"
       key={product.id}
       transition="0.5s"
-      borderRadius="25px"
       onClick={() => router.push(`/product/${product.name}`)}
       _hover={{
         boxShadow: '2xl',
-        borderRadius: '25px',
         cursor: 'pointer',
       }}
     >
       <VStack align={'center'}>
         {!isInHomePage ?
           (
-            <Badge variant="subtle" backgroundColor={hex}>
-              {product.state.name}
-            </Badge>
+            <Flex>
+              <Badge variant="subtle" marginRight="2">
+                {product.state.name}
+              </Badge>
+              <CircleIcon boxSize={4} color={hex}  />
+            </Flex>
+
           ) :  
             <Badge ml="1" fontSize="1.1em" color={navButton}>
              Nouveau !
-            </Badge>  
+            </Badge>
+  
         }
         <Image
           boxSize="300px"

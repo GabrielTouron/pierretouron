@@ -53,17 +53,16 @@ export default function Home({data}: HomePageRequest): ReactElement {
   return (
     <>
      <Flex my="20px" flexDirection="column" alignItems="center">
-      <Heading alignContent="center" size="4xl" mt="8" bgGradient="linear-gradient(90deg, rgba(154,201,198,1) 0%, rgba(252,139,79,1) 35%, rgba(196,92,34,1) 100%)" bgClip="text">
-        Pierre Touron
+      <Heading alignContent="center" size="3xl" mt="8">
+        pierre touron
       </Heading>
       <Box maxW="570px" m="30px">
         <Text>
          {data.contentHomePage.textPresentation}
         </Text>
       </Box>
-
       <Flex>
-        <Button mr="3" onClick={() => router.push('/search')} backgroundColor="secondary">
+        <Button mr="3" onClick={() => router.push('/search')} backgroundColor="primary">
           Accéder au catalogue
         </Button>
         <Button ml="3" variant="link">Accéder au Blog --{'>'} </Button>

@@ -12,7 +12,7 @@ export const Header: React.FC = (): ReactElement => {
 
 
   return (
-    <Box backgroundColor="primary" borderBottom="8px" borderBottomColor="primaryDark" bg={bg}>
+    <Box backgroundColor="primary" borderBottomWidth="5px" borderBottomColor="primaryDark" borderBottomStyle="inset" bg={bg}>
       <Flex
         justifyContent="space-between"
         className="container"
@@ -44,7 +44,7 @@ export const Header: React.FC = (): ReactElement => {
           >
             Catalogue
           </Button>
-          <Button
+          {/* <Button
             variant="ghost"
             size="md"
             colorScheme={navButton}
@@ -52,10 +52,15 @@ export const Header: React.FC = (): ReactElement => {
             onClick={() => router.push('/blog')}
           >
             Blog
-          </Button>
+          </Button> */}
           {colorMode === "dark" ?
-            <SunIcon onClick={toggleColorMode} size="md"/> :
-            <MoonIcon onClick={toggleColorMode} size="md"/>
+            <Button  onClick={toggleColorMode} colorScheme={navButton} variant="ghost">
+              <SunIcon />
+            </Button>
+             :
+            <Button  onClick={toggleColorMode} colorScheme={navButton} variant="ghost">
+              <MoonIcon />
+            </Button>
           }
         </Stack>
       </Flex>
