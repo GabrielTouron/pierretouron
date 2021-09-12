@@ -1,54 +1,21 @@
-import { Box, Flex, Text, Heading, Button } from '@chakra-ui/react'
+import { Box, Flex, Text, Heading, Button, useColorModeValue } from '@chakra-ui/react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
-import { Product } from '../components/molecules/Product'
-import { request } from '../lib/datocms'
-import { HomePage } from '../types'
-
-const HOME_PAGE_QUERY = `query MyQuery {
-  allProducts(orderBy: _createdAt_DESC, first: "1") {
-    price
-    name
-    description
-    id
-    categories {
-      name
-    }
-    image {
-      url
-    }
-    state {
-      name
-      colorStatus {
-        hex
-      }
-      available
-    }
-    createdAt
-  }
-  contentHomePage {
-    textPresentation(locale: fr)
-  }
-}`
-
-type HomePageRequest = {
-  data: HomePage
-}
+import { fetchHomePageData } from '../api/product'
+import { Product } from '../components/Product'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await request({
-    query: HOME_PAGE_QUERY,
-  })
+  const {product, textPresentation } = await fetchHomePageData()
+  
   return {
-    props: { data },
+    props: { product, textPresentation },
   }
 }
 
-export default function Home({data}: HomePageRequest): ReactElement {
+export default function Home({product, textPresentation }: any): ReactElement {
   const router = useRouter()
-  const product = data.allProducts[0]
-
+  const navButtonColor = useColorModeValue("black", "black")
 
   return (
     <>
@@ -58,14 +25,20 @@ export default function Home({data}: HomePageRequest): ReactElement {
       </Heading>
       <Box maxW="570px" m="30px">
         <Text>
-         {data.contentHomePage.textPresentation}
+         {textPresentation}
         </Text>
       </Box>
       <Flex>
-        <Button mr="3" onClick={() => router.push('/search')} backgroundColor="primary">
+        <Button 
+          mr="3"
+          onClick={() => router.push('/search')}
+          bg="primary"
+          textColor={navButtonColor}
+          _hover={{ bg: "primary" }}
+        >
           Accéder au catalogue
         </Button>
-        <Button ml="3" variant="link">Accéder au Blog --{'>'} </Button>
+        <Button ml="3" variant="link" >Accéder au Blog --{'>'} </Button>
       </Flex>
       <Flex mt="10">      
           <Product

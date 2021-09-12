@@ -12,10 +12,9 @@ import {
 import { useRouter } from 'next/router'
 import React from 'react'
 import { CircleIcon } from '../../icons/circle'
-import { IProduct } from '../../types'
 
 interface ProductProps {
-  product: IProduct
+  product: any
   isInHomePage?: boolean
 }
 

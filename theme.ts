@@ -12,6 +12,9 @@ const theme = extendTheme({
     secondary: '#fc8b4f',
   },
   config,
+  components: {
+    // Here place components from Chakra folder
+  }
 })
 
 export default theme

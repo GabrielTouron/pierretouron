@@ -1,4 +1,3 @@
-import { request } from '../lib/datocms'
 import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Box,
@@ -14,117 +13,22 @@ import {
   MenuItemOption,
   Stack,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
-import { Product } from '../components/molecules/Product'
-import { ICategory, IProduct } from '../types'
+import { Product } from '../components/Product/Product'
 import { GetStaticProps } from 'next'
 import { ReactElement } from 'react'
-
-const SEARCH_QUERY = `query MyQuery {
-  allProducts {
-    price
-    name
-    description
-    id
-    categories {
-      name
-    }
-    image {
-      url
-    }
-    state {
-      name
-      colorStatus {
-        hex
-      }
-      available
-    }
-    createdAt
-    shipping
-    productTechnique {
-      name
-    }
-    productDetail {
-      name
-    }
-  }
-  allProductCategories {
-    name
-    id
-    order
-  }
-}`
-
-type CategoryQueryParams = { category?: string; sort?: string }
-type SearchRequest = {
-  data: { allProducts: IProduct[]; allProductCategories: ICategory[] }
-}
+import { fetchSearchPageData } from '../api/product'
+import { filter } from '../domain/product/filterProducts'
+import { displayProduct } from '../domain/product/displayProducts'
+import { ProductCategories } from '../domain/product'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data = await request({
-    query: SEARCH_QUERY,
-  })
+  const { products, productCategories } = await fetchSearchPageData()  
   return {
-    props: { data },
+    props: { products, productCategories },
   }
 }
 
-export default function Search({ data }: SearchRequest): ReactElement {
-  const router = useRouter()
-
-  const filter = (query: CategoryQueryParams): void => {
-    const { category: urlCategory } = router.query
-    const { category: clickCategory } = query
-
-    if (
-      (urlCategory == clickCategory && !!urlCategory) ||
-      clickCategory === 'Tout'
-    ) {
-      const { category, ...rest } = router.query
-      router.push({ pathname: '/search', query: rest })
-      return
-    }
-
-    if (clickCategory !== 'Tout') {
-      router.push({ query: { ...router.query, ...query } })
-    }
-  }
-
-  const displayProduct = (): IProduct[] => {
-    const { category, sort } = router.query    
-
-    let products = !!category
-      ? data.allProducts.filter(
-          (p: IProduct) => p.categories[0].name === category
-        )
-      : data.allProducts
-
-    products =
-      sort === 'price desc'
-        ? products.sort((a: IProduct, b: IProduct) => a.price + b.price)
-        : products
-    products =
-      sort === 'price asc'
-        ? products.sort((a: IProduct, b: IProduct) => a.price - b.price)
-        : products
-    products =
-      sort === 'new'
-        ? products.sort(
-            (a: IProduct, b: IProduct) => {
-              return (new Date(a.createdAt) < new Date(b.createdAt)) ? 1 : -1
-            }
-          )
-        : products
-
-    return products
-  }
-
-  const sortCategories = (): ICategory[] => {
-    const categories = data.allProductCategories.sort(
-      (a: ICategory, b: ICategory) => a.order - b.order
-    )
-    return categories
-  }
+export default function Search({ products, productCategories }: any): ReactElement {
 
   return (
     <>
@@ -134,10 +38,10 @@ export default function Search({ data }: SearchRequest): ReactElement {
       <Box mt="50px">
         <Flex justifyContent="space-between">
           <Box>
-            {sortCategories().map((i) => (
+            {productCategories.map((i : ProductCategories, index: number) => (
               <Button
                 m="5px"
-                key={i.id}
+                key={index}
                 onClick={() => filter({ category: i.name })}
               >
                 {i.name}
@@ -183,7 +87,7 @@ export default function Search({ data }: SearchRequest): ReactElement {
       </Box>
       <Box my="50px">
         <Grid templateColumns="repeat(3, 1fr)" gap={10}>
-          {displayProduct().map((p) => (
+          {displayProduct(products).map((p) => (
             <Product
               key={p.id}
               product={p}

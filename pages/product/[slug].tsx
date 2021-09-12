@@ -21,68 +21,31 @@ import {
 } from '@chakra-ui/react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React, { ReactElement } from 'react'
-import { request } from '../../lib/datocms'
-import { IProduct } from '../../types'
+import { request } from '../../api/datocms'
 import { useRouter } from 'next/router'
+import { fetchProductPageData } from '../../api/product'
 
-
-const PRODUCT_QUERY = `query PorductBySlug($slug: String) {
-  product(filter: {name: {eq: $slug}}) {
-    price
-    name
-    description
-    id
-    categories {
-      name
-    }
-    image {
-      url
-    }
-    state {
-      name
-      colorStatus {
-        hex
-      }
-      available
-    }
-    createdAt
-    shipping
-    productTechnique {
-      name
-    }
-    productDetail {
-      name
-    }
-  }
-}`
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const data = await request({ query: `{ allProducts { name } }` })
 
   return {
     paths: data.allProducts.map(
-      (product: IProduct) => `/product/${product.name}`
+      (product: any) => `/product/${product.name}`
     ),
     fallback: false,
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const data = await request({
-    query: PRODUCT_QUERY,
-    variables: { slug: params.slug },
-  })
+export const getStaticProps: GetStaticProps = async ({ params : { slug } }) => {
+  const product = await fetchProductPageData(slug)
 
   return {
-    props: { data },
+    props: { product },
   }
 }
 
-type ProductRequest = {
-  data: { product: IProduct }
-}
-
-export default function Product({ data }: ProductRequest): ReactElement {
+export default function Product( { product }: any ): ReactElement {
   const [isOpen, setIsOpen] = React.useState(false)
   const onClose = () => setIsOpen(false)
   const cancelRef = React.useRef()
@@ -102,7 +65,7 @@ export default function Product({ data }: ProductRequest): ReactElement {
           <Box w="45%">
             <Image
               objectFit="cover"
-              src={data.product.image.url}
+              src={product.image.url}
               alt="Segun Adebayo"
               onClick={() => setIsOpen(true)}
               borderRadius="25px"
@@ -114,17 +77,17 @@ export default function Product({ data }: ProductRequest): ReactElement {
             />
           </Box>
           <Box w="45%" pt="10">
-            <Heading>{data.product.name}</Heading>
+            <Heading>{product.name}</Heading>
             <Badge mt="3" fontSize="1.1em" colorScheme="green">
-              {data.product.state.name}
+              {product.state.name}
             </Badge>
             <Divider my="5" />
             <Text fontWeight={800} fontSize={'2xl'} my="5">
-              {data.product.price} €
+              {product.price} €
             </Text>
-            <Box my="5">{data.product.productTechnique.name}
+            <Box my="5">{product.productTechnique.name}
             <br/>
-            {data.product.productDetail.name}
+            {product.productDetail.name}
             </Box>
             <Center>
               <Button onClick={() => console.log('ajouter au panier')} my="10">
@@ -143,7 +106,7 @@ export default function Product({ data }: ProductRequest): ReactElement {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                    {data.product.shipping}
+                    {product.shipping}
                   </AccordionPanel>
                 </AccordionItem>
               </Accordion>
@@ -158,13 +121,12 @@ export default function Product({ data }: ProductRequest): ReactElement {
                 <AlertDialogContent w="1000">
                   <Image
                     objectFit="cover"
-                    src={data.product.image.url}
+                    src={product.image.url}
                     alt="Segun Adebayo"
                   />
                 </AlertDialogContent>
               </AlertDialogOverlay>
             </AlertDialog>
-            {/* </Flex> */}
           </Box>
         </Flex>
       </Box>
