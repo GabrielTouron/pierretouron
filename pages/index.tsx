@@ -1,21 +1,27 @@
-import { Box, Flex, Text, Heading, Button, useColorModeValue } from '@chakra-ui/react'
+import { Box, Flex, Text, Heading } from '@chakra-ui/react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
 import { fetchHomePageData } from '../api/product'
-import { Product } from '../components/Product'
+import { Button } from '../components/Button'
+import { ProductCard } from '../components/ProductCard'
+import { Product } from '../domain/product'
 
-export const getStaticProps: GetStaticProps = async () => {
-  const {product, textPresentation } = await fetchHomePageData()
+type HomeProps = {
+  product: Product
+  textPresentation: string
+}
+
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const { product, textPresentation } = await fetchHomePageData()
   
   return {
     props: { product, textPresentation },
   }
 }
 
-export default function Home({product, textPresentation }: any): ReactElement {
+export default function Home({product, textPresentation }: HomeProps): ReactElement {
   const router = useRouter()
-  const navButtonColor = useColorModeValue("black", "black")
 
   return (
     <>
@@ -30,22 +36,16 @@ export default function Home({product, textPresentation }: any): ReactElement {
       </Box>
       <Flex>
         <Button 
-          mr="3"
+          children='Accéder au catalogue'
           onClick={() => router.push('/search')}
-          bg="primary"
-          textColor={navButtonColor}
-          _hover={{ bg: "primary" }}
-        >
-          Accéder au catalogue
-        </Button>
-        <Button ml="3" variant="link" >Accéder au Blog --{'>'} </Button>
+        />
       </Flex>
       <Flex mt="10">      
-          <Product
-            product={product}
-            isInHomePage={true}
-          >
-          </Product>
+        <ProductCard
+          product={product}
+          isInHomePage={true}
+        >
+        </ProductCard>
       </Flex>
     </Flex>
     </>

@@ -1,7 +1,7 @@
 import { request } from "../datocms";
 import { HOME_PAGE_QUERY } from "./query/homePage";
 import { PRODUCT_QUERY } from "./query/productPage";
-import { SEARCH_PAGE_QUERY } from "./query/SearchPage";
+import { SEARCH_PAGE_QUERY } from "./query/searchPage";
 
 export const fetchHomePageData = async () => {
   const { allProducts, contentHomePage } = await request({

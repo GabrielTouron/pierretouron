@@ -7,10 +7,10 @@ interface Props {
   onClick: VoidFunction
 }
 
-export const ButtonNav: React.FC<Props> = ({ifHomeBtn, children, onClick}: Props) => {
+export const NavButton: React.FC<Props> = ({ifHomeBtn, children, onClick}: Props) => {
   const navButtonColor = useColorModeValue("blackAlpha", "white")
 
-  const baseButtonNavProps: ButtonProps = {
+  const baseNavButtonProps: ButtonProps = {
     variant:"ghost",
     colorScheme: navButtonColor,
     onClick
@@ -21,7 +21,7 @@ export const ButtonNav: React.FC<Props> = ({ifHomeBtn, children, onClick}: Props
       <Button
         size="lg"
         fontWeight="bold" 
-        {...baseButtonNavProps}
+        {...baseNavButtonProps}
         >
           {children}
         </Button>
@@ -31,7 +31,7 @@ export const ButtonNav: React.FC<Props> = ({ifHomeBtn, children, onClick}: Props
   return (
     <Button
         size="md"
-        {...baseButtonNavProps}
+        {...baseNavButtonProps}
     >
           {children}
     </Button>

@@ -4,23 +4,24 @@ import {
   Stack,
   Text,
   VStack,
-  Image,
   Badge,
   useColorModeValue,
   Flex,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React from 'react'
+import { Product } from '../../domain/product'
 import { CircleIcon } from '../../icons/circle'
+import { ProductImage } from '../ProductImage/ProductImage'
 
-interface ProductProps {
-  product: any
+interface ProductCardProps {
+  product: Product
   isInHomePage?: boolean
 }
 
-export const Product: React.FC<ProductProps> = ({product, isInHomePage}: ProductProps) => {
+export const ProductCard: React.FC<ProductCardProps> = ({product, isInHomePage}: ProductCardProps) => {
   const router = useRouter()
-  const {hex} = product.state.colorStatus
+  const { hex } = product.state.colorStatus
   const navButton = useColorModeValue("black", "black")
 
   return (
@@ -31,16 +32,13 @@ export const Product: React.FC<ProductProps> = ({product, isInHomePage}: Product
       key={product.id}
       transition="0.5s"
       onClick={() => router.push(`/product/${product.name}`)}
-      _hover={{
-        boxShadow: '2xl',
-        cursor: 'pointer',
-      }}
+      layerStyle="hoverBase"
     >
-      <VStack align={'center'}>
+      <VStack align='center'>
         {!isInHomePage ?
           (
             <Flex>
-              <Badge variant="subtle" marginRight="2">
+              <Badge variant="subtle" marginRight="2" color={navButton}>
                 {product.state.name}
               </Badge>
               <CircleIcon boxSize={4} color={hex}  />
@@ -52,21 +50,20 @@ export const Product: React.FC<ProductProps> = ({product, isInHomePage}: Product
             </Badge>
   
         }
-        <Image
+        <ProductImage
           boxSize="300px"
-          objectFit="cover"
           src={product.image.url}
           alt="Segun Adebayo"
         />
 
-        <Text color="black" fontSize={'sm'} textTransform={'uppercase'}>
+        <Text color="black" fontSize='sm' textTransform='uppercase'>
           {product.categories[0].name}
         </Text>
-        <Heading color="black" fontSize={'2xl'} fontFamily={'body'} fontWeight={500}>
+        <Heading color="black" fontSize='2xl' fontFamily='body' fontWeight={500}>
           {product.name}
         </Heading>
-        <Stack direction={'row'} align={'center'} />
-        <Text fontWeight={800} fontSize={'xl'} color="black">
+        <Stack direction='row' align='center' />
+        <Text fontWeight={800} fontSize='xl' color="black">
           {product.price} €
         </Text>
       </VStack>

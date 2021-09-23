@@ -13,22 +13,27 @@ import {
   MenuItemOption,
   Stack,
 } from '@chakra-ui/react'
-import { Product } from '../components/Product/Product'
+import { ProductCard } from '../components/ProductCard/ProductCard'
 import { GetStaticProps } from 'next'
 import { ReactElement } from 'react'
 import { fetchSearchPageData } from '../api/product'
 import { filter } from '../domain/product/filterProducts'
 import { displayProduct } from '../domain/product/displayProducts'
-import { ProductCategories } from '../domain/product'
+import { Product, ProductCategories } from '../domain/product'
 
-export const getStaticProps: GetStaticProps = async () => {
+type SearchProps = {
+  products: Product[]
+  productCategories: ProductCategories[]
+}
+
+export const getStaticProps: GetStaticProps<SearchProps> = async () => {
   const { products, productCategories } = await fetchSearchPageData()  
   return {
     props: { products, productCategories },
   }
 }
 
-export default function Search({ products, productCategories }: any): ReactElement {
+export default function Search({ products, productCategories }: SearchProps): ReactElement {
 
   return (
     <>
@@ -88,7 +93,7 @@ export default function Search({ products, productCategories }: any): ReactEleme
       <Box my="50px">
         <Grid templateColumns="repeat(3, 1fr)" gap={10}>
           {displayProduct(products).map((p) => (
-            <Product
+            <ProductCard
               key={p.id}
               product={p}
             />

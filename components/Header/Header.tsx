@@ -1,7 +1,5 @@
-import {  MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { Box, Button, Flex, Stack, useColorMode, useColorModeValue } from '@chakra-ui/react'
+import { Box, useColorModeValue } from '@chakra-ui/react'
 import React, { ReactElement } from 'react'
-import { useRouter } from 'next/router'
 import { Nav } from '../Nav'
 
 export const Header: React.FC = (): ReactElement => {

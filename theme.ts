@@ -12,9 +12,14 @@ const theme = extendTheme({
     secondary: '#fc8b4f',
   },
   config,
-  components: {
-    // Here place components from Chakra folder
-  }
+  layerStyles: {
+    hoverBase: {
+      _hover : {
+        boxShadow: '2xl',
+        cursor: 'pointer',
+      }
+    },
+  },
 })
 
 export default theme

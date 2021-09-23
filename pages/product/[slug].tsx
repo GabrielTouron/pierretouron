@@ -17,66 +17,58 @@ import {
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
-  IconButton
 } from '@chakra-ui/react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import React, { ReactElement } from 'react'
 import { request } from '../../api/datocms'
-import { useRouter } from 'next/router'
 import { fetchProductPageData } from '../../api/product'
+import { ProductImage } from '../../components/ProductImage/ProductImage'
+import { Product } from '../../domain/product'
+import { ButtonBack } from '../../components/ButtonBack'
 
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await request({ query: `{ allProducts { name } }` })
-
-  return {
-    paths: data.allProducts.map(
-      (product: any) => `/product/${product.name}`
-    ),
-    fallback: false,
-  }
+type ProductDetailProps = {
+  product: Product
 }
 
-export const getStaticProps: GetStaticProps = async ({ params : { slug } }) => {
-  const product = await fetchProductPageData(slug)
+export const getStaticProps: GetStaticProps<ProductDetailProps> = async (context) => {
+  const product = await fetchProductPageData(context.params.slug)
 
   return {
     props: { product },
   }
 }
 
-export default function Product( { product }: any ): ReactElement {
+export const getStaticPaths: GetStaticPaths = async () => {
+  const {allProducts} = await request({ query: `{ allProducts { name } }` })
+
+  return {
+    paths: allProducts.map(
+      (product: Product) => `/product/${product.name}`
+    ),
+    fallback: false,
+  }
+}
+
+export default function ProductDetail( {product} : ProductDetailProps ): ReactElement {
   const [isOpen, setIsOpen] = React.useState(false)
   const onClose = () => setIsOpen(false)
   const cancelRef = React.useRef()
-  const router = useRouter()
-
   return (
       <>
-        <IconButton
-          aria-label="Back to search page"
-          size="lg"
-          my="5"
-          icon={<ArrowBackIcon />}
-          onClick={()=> router.back()}
-        />
+      <ButtonBack/>
       <Box>
         <Flex justifyContent="space-between">
+          {/* Todo : En faire une grid / layout? */}
           <Box w="45%">
-            <Image
-              objectFit="cover"
+            <ProductImage
               src={product.image.url}
               alt="Segun Adebayo"
               onClick={() => setIsOpen(true)}
-              borderRadius="25px"
-              _hover={{
-                boxShadow: '2xl',
-                borderRadius: '25px',
-                cursor: 'pointer',
-              }}
+              hasHover={true}
             />
           </Box>
           <Box w="45%" pt="10">
+            {/* Todo Faire un composant ProductDescription ? */}
             <Heading>{product.name}</Heading>
             <Badge mt="3" fontSize="1.1em" colorScheme="green">
               {product.state.name}
@@ -111,6 +103,7 @@ export default function Product( { product }: any ): ReactElement {
                 </AccordionItem>
               </Accordion>
             </Box>
+            {/* Todo: Faire une composant AlertProductDialog ? */}
             <AlertDialog
               isOpen={isOpen}
               leastDestructiveRef={cancelRef}
