@@ -1,51 +1,33 @@
-import { MoonIcon, SunIcon } from '@chakra-ui/icons'
-import { Stack } from '@chakra-ui/layout'
-import { Flex, useColorMode } from '@chakra-ui/react'
-import router from 'next/dist/client/router'
-import React from 'react'
-import { NavButton } from '../NavButtonIf'
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import { Stack } from "@chakra-ui/layout";
+import { Flex, useColorMode } from "@chakra-ui/react";
+import router from "next/dist/client/router";
+import React from "react";
+import { NavButton } from "../NavButtonIf";
 
 export const Nav: React.FC = () => {
-  const { colorMode, toggleColorMode } = useColorMode()
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Flex justifyContent="space-between" className="container" m="0 auto" p="5">
-      <NavButton
-        onClick={() => router.push('/')}
-        ifHomeBtn={true}
-      >
+    <Flex justifyContent="space-between" m="0 auto" p="5" maxWidth="1100px">
+      <NavButton onClick={() => router.push("/")} ifHomeBtn={true}>
         Accueil
       </NavButton>
-      <Stack
-        spacing={2}
-        justifyContent="center"
-        flexDirection="row"
-        alignItems="center"
-        isInline
-      >
-        <NavButton
-          onClick={() => router.push('/search')}
-          ifHomeBtn={false}
-        >
+      <Stack spacing={2} justifyContent="center" flexDirection="row" alignItems="center" isInline>
+        <NavButton onClick={() => router.push("/search")} ifHomeBtn={false}>
           Catalogue
         </NavButton>
 
-        {colorMode === 'dark' ? (
-          <NavButton
-            onClick={toggleColorMode}
-            ifHomeBtn={false}
-          >
+        {colorMode === "dark" ? (
+          <NavButton onClick={toggleColorMode} ifHomeBtn={false}>
             <SunIcon />
           </NavButton>
         ) : (
-          <NavButton
-            onClick={toggleColorMode}
-            ifHomeBtn={false}
-          >
+          <NavButton onClick={toggleColorMode} ifHomeBtn={false}>
             <MoonIcon />
           </NavButton>
         )}
       </Stack>
     </Flex>
-  )
-}
+  );
+};
