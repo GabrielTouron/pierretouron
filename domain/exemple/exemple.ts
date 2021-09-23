@@ -1,4 +1,4 @@
-export type Status = "tata" | "toto" | "tutu"
+export type Status = 'tata' | 'toto' | 'tutu'
 
 export type Exemple = {
   prop1: OtherType
@@ -11,10 +11,14 @@ export type OtherType = {
   prop2: string
 }
 
-export const createExemple = (otherType: OtherType, prop2: string, status: Status) : Exemple => {
+export const createExemple = (
+  otherType: OtherType,
+  prop2: string,
+  status: Status
+): Exemple => {
   return {
     prop1: otherType,
     prop2,
-    status
+    status,
   }
 }

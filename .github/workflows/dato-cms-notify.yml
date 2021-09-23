@@ -2,8 +2,8 @@ name: Send status notification to datocms
 
 on:
   workflow_run:
-    workflows: ["Deploy to Firebase Hosting on request"]
-    types: [completed] 
+    workflows: ['Deploy to Firebase Hosting on request']
+    types: [completed]
 jobs:
   on-success:
     runs-on: ubuntu-latest
@@ -23,5 +23,3 @@ jobs:
           curl -n -X POST https://webhooks.datocms.com/fc4df1f556/deploy-results \
           -H 'Content-Type: application/json' \
           -d '{ "status": "error" }'
-  
-    

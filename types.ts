@@ -3,9 +3,3 @@ export interface ICategory {
   name: string
   order: number
 }
-
-
-
-
-
-

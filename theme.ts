@@ -14,10 +14,10 @@ const theme = extendTheme({
   config,
   layerStyles: {
     hoverBase: {
-      _hover : {
+      _hover: {
         boxShadow: '2xl',
         cursor: 'pointer',
-      }
+      },
     },
   },
 })

@@ -14,40 +14,38 @@ type HomeProps = {
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const { product, textPresentation } = await fetchHomePageData()
-  
+
   return {
     props: { product, textPresentation },
   }
 }
 
-export default function Home({product, textPresentation }: HomeProps): ReactElement {
+export default function Home({
+  product,
+  textPresentation,
+}: HomeProps): ReactElement {
   const router = useRouter()
 
   return (
     <>
-     <Flex my="20px" flexDirection="column" alignItems="center">
-      <Heading alignContent="center" size="3xl" mt="8">
-        pierre touron
-      </Heading>
-      <Box maxW="570px" m="30px">
-        <Text>
-         {textPresentation}
-        </Text>
-      </Box>
-      <Flex>
-        <Button 
-          children='Accéder au catalogue'
-          onClick={() => router.push('/search')}
-        />
+      <Flex my="20px" flexDirection="column" alignItems="center">
+        <Heading alignContent="center" size="3xl" mt="8">
+          pierre touron
+        </Heading>
+        <Box maxW="570px" m="30px">
+          <Text>{textPresentation}</Text>
+        </Box>
+        <Flex>
+          <Button
+            onClick={() => router.push('/search')}
+          >
+            Accéder au catalogue
+          </Button>
+        </Flex>
+        <Flex mt="10">
+          <ProductCard product={product} isInHomePage={true}></ProductCard>
+        </Flex>
       </Flex>
-      <Flex mt="10">      
-        <ProductCard
-          product={product}
-          isInHomePage={true}
-        >
-        </ProductCard>
-      </Flex>
-    </Flex>
     </>
   )
 }

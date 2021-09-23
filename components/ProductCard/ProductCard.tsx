@@ -19,10 +19,13 @@ interface ProductCardProps {
   isInHomePage?: boolean
 }
 
-export const ProductCard: React.FC<ProductCardProps> = ({product, isInHomePage}: ProductCardProps) => {
+export const ProductCard: React.FC<ProductCardProps> = ({
+  product,
+  isInHomePage,
+}: ProductCardProps) => {
   const router = useRouter()
   const { hex } = product.state.colorStatus
-  const navButton = useColorModeValue("black", "black")
+  const navButton = useColorModeValue('black', 'black')
 
   return (
     <Center
@@ -34,36 +37,38 @@ export const ProductCard: React.FC<ProductCardProps> = ({product, isInHomePage}:
       onClick={() => router.push(`/product/${product.name}`)}
       layerStyle="hoverBase"
     >
-      <VStack align='center'>
-        {!isInHomePage ?
-          (
-            <Flex>
-              <Badge variant="subtle" marginRight="2" color={navButton}>
-                {product.state.name}
-              </Badge>
-              <CircleIcon boxSize={4} color={hex}  />
-            </Flex>
-
-          ) :  
-            <Badge ml="1" fontSize="1.1em" color={navButton}>
-             Nouveau !
+      <VStack align="center">
+        {!isInHomePage ? (
+          <Flex>
+            <Badge variant="subtle" marginRight="2" color={navButton}>
+              {product.state.name}
             </Badge>
-  
-        }
+            <CircleIcon boxSize={4} color={hex} />
+          </Flex>
+        ) : (
+          <Badge ml="1" fontSize="1.1em" color={navButton}>
+            Nouveau !
+          </Badge>
+        )}
         <ProductImage
           boxSize="300px"
           src={product.image.url}
           alt="Segun Adebayo"
         />
 
-        <Text color="black" fontSize='sm' textTransform='uppercase'>
+        <Text color="black" fontSize="sm" textTransform="uppercase">
           {product.categories[0].name}
         </Text>
-        <Heading color="black" fontSize='2xl' fontFamily='body' fontWeight={500}>
+        <Heading
+          color="black"
+          fontSize="2xl"
+          fontFamily="body"
+          fontWeight={500}
+        >
           {product.name}
         </Heading>
-        <Stack direction='row' align='center' />
-        <Text fontWeight={800} fontSize='xl' color="black">
+        <Stack direction="row" align="center" />
+        <Text fontWeight={800} fontSize="xl" color="black">
           {product.price} €
         </Text>
       </VStack>

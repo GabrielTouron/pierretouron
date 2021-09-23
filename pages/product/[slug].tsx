@@ -1,4 +1,3 @@
-import { ArrowBackIcon } from '@chakra-ui/icons'
 import {
   Heading,
   Button,
@@ -25,13 +24,16 @@ import { fetchProductPageData } from '../../api/product'
 import { ProductImage } from '../../components/ProductImage/ProductImage'
 import { Product } from '../../domain/product'
 import { ButtonBack } from '../../components/ButtonBack'
+import { FocusableElement } from '@chakra-ui/utils'
 
 type ProductDetailProps = {
   product: Product
 }
 
-export const getStaticProps: GetStaticProps<ProductDetailProps> = async (context) => {
-  const product = await fetchProductPageData(context.params.slug)
+export const getStaticProps: GetStaticProps<ProductDetailProps> = async (
+  context
+) => {
+  const product = await fetchProductPageData(context.params?.slug)
 
   return {
     props: { product },
@@ -39,23 +41,24 @@ export const getStaticProps: GetStaticProps<ProductDetailProps> = async (context
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const {allProducts} = await request({ query: `{ allProducts { name } }` })
+  const { allProducts } = await request({ query: `{ allProducts { name } }` })
 
   return {
-    paths: allProducts.map(
-      (product: Product) => `/product/${product.name}`
-    ),
+    paths: allProducts.map((product: Product) => `/product/${product.name}`),
     fallback: false,
   }
 }
 
-export default function ProductDetail( {product} : ProductDetailProps ): ReactElement {
+export default function ProductDetail({
+  product,
+}: ProductDetailProps): ReactElement {
   const [isOpen, setIsOpen] = React.useState(false)
   const onClose = () => setIsOpen(false)
-  const cancelRef = React.useRef()
+  const cancelRef = React.useRef() as React.MutableRefObject<FocusableElement>
+  
   return (
-      <>
-      <ButtonBack/>
+    <>
+      <ButtonBack />
       <Box>
         <Flex justifyContent="space-between">
           {/* Todo : En faire une grid / layout? */}
@@ -77,9 +80,10 @@ export default function ProductDetail( {product} : ProductDetailProps ): ReactEl
             <Text fontWeight={800} fontSize={'2xl'} my="5">
               {product.price} €
             </Text>
-            <Box my="5">{product.productTechnique.name}
-            <br/>
-            {product.productDetail.name}
+            <Box my="5">
+              {product.productTechnique.name}
+              <br />
+              {product.productDetail.name}
             </Box>
             <Center>
               <Button onClick={() => console.log('ajouter au panier')} my="10">
@@ -97,9 +101,7 @@ export default function ProductDetail( {product} : ProductDetailProps ): ReactEl
                       <AccordionIcon />
                     </AccordionButton>
                   </h2>
-                  <AccordionPanel pb={4}>
-                    {product.shipping}
-                  </AccordionPanel>
+                  <AccordionPanel pb={4}>{product.shipping}</AccordionPanel>
                 </AccordionItem>
               </Accordion>
             </Box>

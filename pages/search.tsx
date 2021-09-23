@@ -27,23 +27,27 @@ type SearchProps = {
 }
 
 export const getStaticProps: GetStaticProps<SearchProps> = async () => {
-  const { products, productCategories } = await fetchSearchPageData()  
+  const { products, productCategories } = await fetchSearchPageData()
   return {
     props: { products, productCategories },
   }
 }
 
-export default function Search({ products, productCategories }: SearchProps): ReactElement {
-
+export default function Search({
+  products,
+  productCategories,
+}: SearchProps): ReactElement {
   return (
     <>
       <Center my="20px">
-        <Heading alignContent="center" mt="8">Catalogue</Heading>
+        <Heading alignContent="center" mt="8">
+          Catalogue
+        </Heading>
       </Center>
       <Box mt="50px">
         <Flex justifyContent="space-between">
           <Box>
-            {productCategories.map((i : ProductCategories, index: number) => (
+            {productCategories.map((i: ProductCategories, index: number) => (
               <Button
                 m="5px"
                 key={index}
@@ -93,10 +97,7 @@ export default function Search({ products, productCategories }: SearchProps): Re
       <Box my="50px">
         <Grid templateColumns="repeat(3, 1fr)" gap={10}>
           {displayProduct(products).map((p) => (
-            <ProductCard
-              key={p.id}
-              product={p}
-            />
+            <ProductCard key={p.id} product={p} />
           ))}
         </Grid>
       </Box>

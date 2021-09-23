@@ -1,7 +1,7 @@
-import { ArrowBackIcon } from "@chakra-ui/icons";
-import { IconButton } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import React from "react";
+import { ArrowBackIcon } from '@chakra-ui/icons'
+import { IconButton } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import React from 'react'
 
 export const ButtonBack: React.FC = () => {
   const router = useRouter()
@@ -12,7 +12,7 @@ export const ButtonBack: React.FC = () => {
       size="lg"
       my="5"
       icon={<ArrowBackIcon />}
-      onClick={()=> router.back()}
+      onClick={() => router.back()}
     />
-  ) 
+  )
 }

@@ -1,39 +1,36 @@
-import { Button, ButtonProps, useColorModeValue } from "@chakra-ui/react";
-import React from "react";
+import { Button, ButtonProps, useColorModeValue } from '@chakra-ui/react'
+import React, { ReactElement } from 'react'
 
 interface Props {
   ifHomeBtn: boolean
-  children: any
+  children: string | ReactElement
   onClick: VoidFunction
 }
 
-export const NavButton: React.FC<Props> = ({ifHomeBtn, children, onClick}: Props) => {
-  const navButtonColor = useColorModeValue("blackAlpha", "white")
+export const NavButton: React.FC<Props> = ({
+  ifHomeBtn,
+  children,
+  onClick,
+}: Props) => {
+  const navButtonColor = useColorModeValue('blackAlpha', 'white')
 
   const baseNavButtonProps: ButtonProps = {
-    variant:"ghost",
+    variant: 'ghost',
     colorScheme: navButtonColor,
-    onClick
+    onClick,
   }
 
   if (ifHomeBtn) {
     return (
-      <Button
-        size="lg"
-        fontWeight="bold" 
-        {...baseNavButtonProps}
-        >
-          {children}
-        </Button>
+      <Button size="lg" fontWeight="bold" {...baseNavButtonProps}>
+        {children}
+      </Button>
     )
   }
 
   return (
-    <Button
-        size="md"
-        {...baseNavButtonProps}
-    >
-          {children}
+    <Button size="md" {...baseNavButtonProps}>
+      {children}
     </Button>
   )
 }

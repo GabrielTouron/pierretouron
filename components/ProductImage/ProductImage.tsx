@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 import { chakra } from '@chakra-ui/react'
 
 interface Props {
@@ -9,7 +9,13 @@ interface Props {
   hasHover?: boolean
 }
 
-export const ProductImage: React.FC<Props> = ({boxSize, src, alt, onClick, hasHover} :Props) => {
+export const ProductImage: React.FC<Props> = ({
+  boxSize,
+  src,
+  alt,
+  onClick,
+  hasHover,
+}: Props) => {
   return (
     <chakra.img
       boxSize={boxSize}
@@ -17,7 +23,7 @@ export const ProductImage: React.FC<Props> = ({boxSize, src, alt, onClick, hasHo
       src={src}
       alt={alt}
       onClick={onClick}
-      layerStyle={hasHover ? "hoverBase" : ""}
+      layerStyle={hasHover ? 'hoverBase' : ''}
     />
-  ) 
+  )
 }
