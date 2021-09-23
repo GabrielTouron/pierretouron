@@ -12,6 +12,14 @@ const theme = extendTheme({
     secondary: '#fc8b4f',
   },
   config,
+  layerStyles: {
+    hoverBase: {
+      _hover: {
+        boxShadow: '2xl',
+        cursor: 'pointer',
+      },
+    },
+  },
 })
 
 export default theme

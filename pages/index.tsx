@@ -1,80 +1,51 @@
-import { Box, Flex, Text, Heading, Button } from '@chakra-ui/react'
+import { Box, Flex, Text, Heading } from '@chakra-ui/react'
 import { GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import React, { ReactElement } from 'react'
-import { Product } from '../components/molecules/Product'
-import { request } from '../lib/datocms'
-import { HomePage } from '../types'
+import { fetchHomePageData } from '../api/product'
+import { Button } from '../components/Button'
+import { ProductCard } from '../components/ProductCard'
+import { Product } from '../domain/product'
 
-const HOME_PAGE_QUERY = `query MyQuery {
-  allProducts(orderBy: _createdAt_DESC, first: "1") {
-    price
-    name
-    description
-    id
-    categories {
-      name
-    }
-    image {
-      url
-    }
-    state {
-      name
-      colorStatus {
-        hex
-      }
-      available
-    }
-    createdAt
-  }
-  contentHomePage {
-    textPresentation(locale: fr)
-  }
-}`
-
-type HomePageRequest = {
-  data: HomePage
+type HomeProps = {
+  product: Product
+  textPresentation: string
 }
 
-export const getStaticProps: GetStaticProps = async () => {
-  const data = await request({
-    query: HOME_PAGE_QUERY,
-  })
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
+  const { product, textPresentation } = await fetchHomePageData()
+
   return {
-    props: { data },
+    props: { product, textPresentation },
   }
 }
 
-export default function Home({data}: HomePageRequest): ReactElement {
+export default function Home({
+  product,
+  textPresentation,
+}: HomeProps): ReactElement {
   const router = useRouter()
-  const product = data.allProducts[0]
-
 
   return (
     <>
-     <Flex my="20px" flexDirection="column" alignItems="center">
-      <Heading alignContent="center" size="3xl" mt="8">
-        pierre touron
-      </Heading>
-      <Box maxW="570px" m="30px">
-        <Text>
-         {data.contentHomePage.textPresentation}
-        </Text>
-      </Box>
-      <Flex>
-        <Button mr="3" onClick={() => router.push('/search')} backgroundColor="primary">
-          Accéder au catalogue
-        </Button>
-        <Button ml="3" variant="link">Accéder au Blog --{'>'} </Button>
-      </Flex>
-      <Flex mt="10">      
-          <Product
-            product={product}
-            isInHomePage={true}
+      <Flex my="20px" flexDirection="column" alignItems="center">
+        <Heading alignContent="center" size="3xl" mt="8">
+          pierre touron
+        </Heading>
+        <Box maxW="570px" m="30px">
+          <Text>{textPresentation}</Text>
+        </Box>
+        <Flex>
+          <Button
+            onClick={() => router.push('/search')}
           >
-          </Product>
+            Accéder au catalogue
+          </Button>
+        </Flex>
+        <Flex mt="10">
+          <ProductCard product={product} isInHomePage={true}></ProductCard>
+        </Flex>
       </Flex>
-    </Flex>
     </>
   )
 }

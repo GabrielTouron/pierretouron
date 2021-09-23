@@ -1,4 +1,5 @@
 import { GraphQLClient } from 'graphql-request'
+
 export interface GraphQLRequest {
   query: string
   variables?: unknown

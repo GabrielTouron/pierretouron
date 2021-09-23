@@ -20,4 +20,3 @@ jobs:
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_PIERRE_TOURON_D6705 }}
           channelId: live
           projectId: pierre-touron-d6705
- 
