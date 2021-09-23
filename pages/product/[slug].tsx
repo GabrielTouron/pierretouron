@@ -64,7 +64,7 @@ export default function ProductDetail({ product }: ProductDetailProps): ReactEle
             hasHover={true}
           />
         </Box>
-        <Box pt="10">
+        <Box>
           <Heading>{product.name}</Heading>
           <Badge mt="3" fontSize="1.1em" colorScheme="green">
             {product.state.name}

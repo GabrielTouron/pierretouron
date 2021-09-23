@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
     <ChakraProvider theme={theme}>
       <Header />
       <Container
-        margin="0 auto"
+        margin="20px auto"
         maxWidth={{ base: "90%", md: "1100px" }}
         margin-bottom={{ base: "150px", md: "0" }}
       >

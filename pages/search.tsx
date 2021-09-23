@@ -39,10 +39,8 @@ export default function Search({ products, productCategories }: SearchProps): Re
 
   return (
     <>
-      <Center my="20px">
-        <Heading alignContent="center" mt="8">
-          Catalogue
-        </Heading>
+      <Center>
+        <Heading alignContent="center">Catalogue</Heading>
       </Center>
       <Box mt="50px">
         <Flex justifyContent="space-between" direction={{ base: "column", md: "row" }}>
