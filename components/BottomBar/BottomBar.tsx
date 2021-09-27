@@ -1,10 +1,12 @@
 import { Box } from "@chakra-ui/layout";
 import { useColorModeValue } from "@chakra-ui/system";
-import React from "react";
+import { useMaxScroll } from "../../hooks/useMaxScroll";
 import { Nav } from "../Nav";
 
 export const BottomBar: React.FC = () => {
   const bg = useColorModeValue("primary", "#2D3748");
+  const isMaxScroll = useMaxScroll();
+
   return (
     <Box
       display={{ md: "none" }}
@@ -14,10 +16,12 @@ export const BottomBar: React.FC = () => {
       borderBottomStyle="inset"
       bg={bg}
       position="fixed"
-      bottom="0"
+      bottom={isMaxScroll ? "-100px" : "0"}
       left="0"
       right="0"
       margin-bottom="0"
+      transition="bottom 0.3s"
+      zIndex="300"
     >
       <Nav />
     </Box>

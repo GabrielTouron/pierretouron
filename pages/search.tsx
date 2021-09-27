@@ -44,7 +44,7 @@ export default function Search({ products, productCategories }: SearchProps): Re
       </Center>
       <Box mt="50px">
         <Flex justifyContent="space-between" direction={{ base: "column", md: "row" }}>
-          <Box margin={{ base: "auto", md: "0" }}>
+          <Box margin={{ base: "auto", md: "0" }} overflowX="scroll" whiteSpace="nowrap">
             {productCategories.map((i: ProductCategories, index: number) => (
               <Button m="5px" key={index} onClick={() => filter({ category: i.name })}>
                 {i.name}
@@ -86,7 +86,7 @@ export default function Search({ products, productCategories }: SearchProps): Re
         </Flex>
       </Box>
       <Box my="50px">
-        <SimpleGrid minChildWidth="340px" spacing="20px">
+        <SimpleGrid minChildWidth={{ base: "250px", md: "300px" }} spacing="20px">
           {displayProduct(products).map((p) => (
             <ProductCard product={p} key={p.id} />
           ))}

@@ -19,8 +19,5 @@ export const displayProduct = (allProducts: Product[]): Product[] => {
           return new Date(a.createdAt) < new Date(b.createdAt) ? 1 : -1;
         })
       : products;
-
-  console.log(products);
-
   return products;
 };

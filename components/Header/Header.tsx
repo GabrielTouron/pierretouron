@@ -8,7 +8,6 @@ export const Header: React.FC = (): ReactElement => {
   return (
     <Box
       display={{ base: "none", md: "block" }}
-      backgroundColor="primary"
       borderBottomWidth="5px"
       borderBottomColor="primaryDark"
       borderBottomStyle="inset"

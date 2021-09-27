@@ -87,7 +87,7 @@ export default function ProductDetail({ product }: ProductDetailProps): ReactEle
             />
           </Box>
 
-          <Box>
+          <Box marginY="30px">
             <Accordion allowMultiple>
               <AccordionItem>
                 <h2>
