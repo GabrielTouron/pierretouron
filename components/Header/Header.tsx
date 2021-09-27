@@ -1,13 +1,13 @@
-import { Box, useColorModeValue } from '@chakra-ui/react'
-import React, { ReactElement } from 'react'
-import { Nav } from '../Nav'
+import { Box, useColorModeValue } from "@chakra-ui/react";
+import React, { ReactElement } from "react";
+import { Nav } from "../Nav";
 
 export const Header: React.FC = (): ReactElement => {
-  const bg = useColorModeValue('primary', '#2D3748')
+  const bg = useColorModeValue("primary", "#2D3748");
 
   return (
     <Box
-      backgroundColor="primary"
+      display={{ base: "none", md: "block" }}
       borderBottomWidth="5px"
       borderBottomColor="primaryDark"
       borderBottomStyle="inset"
@@ -15,5 +15,5 @@ export const Header: React.FC = (): ReactElement => {
     >
       <Nav />
     </Box>
-  )
-}
+  );
+};

@@ -3,7 +3,6 @@ import {
   Button,
   Box,
   Center,
-  Flex,
   Image,
   Accordion,
   AccordionItem,
@@ -16,53 +15,70 @@ import {
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
-} from '@chakra-ui/react'
-import { GetStaticPaths, GetStaticProps } from 'next'
-import React, { ReactElement } from 'react'
-import { request } from '../../api/datocms'
-import { fetchProductPageData } from '../../api/product'
-import { ProductImage } from '../../components/ProductImage/ProductImage'
-import { Product } from '../../domain/product'
-import { ButtonBack } from '../../components/ButtonBack'
-import { FocusableElement } from '@chakra-ui/utils'
+  SimpleGrid,
+} from "@chakra-ui/react";
+import { GetStaticPaths, GetStaticProps } from "next";
+import React, { ReactElement } from "react";
+import { request } from "../../api/datocms";
+import { fetchProductPageData } from "../../api/product";
+import { ProductImage } from "../../components/ProductImage/ProductImage";
+import { Product } from "../../domain/product";
+import { ButtonBack } from "../../components/ButtonBack";
+import { FocusableElement } from "@chakra-ui/utils";
 
 type ProductDetailProps = {
-  product: Product
-}
+  product: Product;
+};
 
-export const getStaticProps: GetStaticProps<ProductDetailProps> = async (
-  context
-) => {
-  const product = await fetchProductPageData(context.params?.slug)
+export const getStaticProps: GetStaticProps<ProductDetailProps> = async (context) => {
+  const product = await fetchProductPageData(context.params?.slug);
 
   return {
     props: { product },
-  }
-}
+  };
+};
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { allProducts } = await request({ query: `{ allProducts { name } }` })
+  const { allProducts } = await request({ query: `{ allProducts { name } }` });
 
   return {
     paths: allProducts.map((product: Product) => `/product/${product.name}`),
     fallback: false,
-  }
-}
+  };
+};
 
-export default function ProductDetail({
-  product,
-}: ProductDetailProps): ReactElement {
-  const [isOpen, setIsOpen] = React.useState(false)
-  const onClose = () => setIsOpen(false)
-  const cancelRef = React.useRef() as React.MutableRefObject<FocusableElement>
-  
+export default function ProductDetail({ product }: ProductDetailProps): ReactElement {
+  const [isOpen, setIsOpen] = React.useState(false);
+  const onClose = () => setIsOpen(false);
+  const cancelRef = React.useRef() as React.MutableRefObject<FocusableElement>;
+
   return (
     <>
       <ButtonBack />
-      <Box>
-        <Flex justifyContent="space-between">
-          {/* Todo : En faire une grid / layout? */}
-          <Box w="45%">
+      <SimpleGrid minChildWidth="45%" spacing="50px">
+        <Box display={{ base: "none", md: "block" }}>
+          <ProductImage
+            src={product.image.url}
+            alt="Segun Adebayo"
+            onClick={() => setIsOpen(true)}
+            hasHover={true}
+          />
+        </Box>
+        <Box>
+          <Heading>{product.name}</Heading>
+          <Badge mt="3" fontSize="1.1em" colorScheme="green">
+            {product.state.name}
+          </Badge>
+          <Divider my="5" />
+          <Text fontWeight={800} fontSize={"2xl"} my="5">
+            {product.price} €
+          </Text>
+          <Box my="5">
+            {product.productTechnique.name}
+            <br />
+            {product.productDetail.name}
+          </Box>
+          <Box display={{ md: "none" }}>
             <ProductImage
               src={product.image.url}
               alt="Segun Adebayo"
@@ -70,61 +86,37 @@ export default function ProductDetail({
               hasHover={true}
             />
           </Box>
-          <Box w="45%" pt="10">
-            {/* Todo Faire un composant ProductDescription ? */}
-            <Heading>{product.name}</Heading>
-            <Badge mt="3" fontSize="1.1em" colorScheme="green">
-              {product.state.name}
-            </Badge>
-            <Divider my="5" />
-            <Text fontWeight={800} fontSize={'2xl'} my="5">
-              {product.price} €
-            </Text>
-            <Box my="5">
-              {product.productTechnique.name}
-              <br />
-              {product.productDetail.name}
-            </Box>
-            <Center>
-              <Button onClick={() => console.log('ajouter au panier')} my="10">
-                AJOUTER AU PANIER
-              </Button>
-            </Center>
-            <Box>
-              <Accordion allowMultiple>
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton>
-                      <Box flex="1" textAlign="left">
-                        Livraison
-                      </Box>
-                      <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>{product.shipping}</AccordionPanel>
-                </AccordionItem>
-              </Accordion>
-            </Box>
-            {/* Todo: Faire une composant AlertProductDialog ? */}
-            <AlertDialog
-              isOpen={isOpen}
-              leastDestructiveRef={cancelRef}
-              onClose={onClose}
-              size="3xl"
-            >
-              <AlertDialogOverlay>
-                <AlertDialogContent w="1000">
-                  <Image
-                    objectFit="cover"
-                    src={product.image.url}
-                    alt="Segun Adebayo"
-                  />
-                </AlertDialogContent>
-              </AlertDialogOverlay>
-            </AlertDialog>
+
+          <Box marginY="30px">
+            <Accordion allowMultiple>
+              <AccordionItem>
+                <h2>
+                  <AccordionButton>
+                    <Box flex="1" textAlign="left">
+                      Livraison
+                    </Box>
+                    <AccordionIcon />
+                  </AccordionButton>
+                </h2>
+                <AccordionPanel pb={4}>{product.shipping}</AccordionPanel>
+              </AccordionItem>
+            </Accordion>
           </Box>
-        </Flex>
-      </Box>
+          <Center>
+            <Button onClick={() => console.log("ajouter au panier")} my="10">
+              AJOUTER AU PANIER
+            </Button>
+          </Center>
+          {/* Todo: Faire une composant AlertProductDialog ? */}
+          <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} size="3xl">
+            <AlertDialogOverlay>
+              <AlertDialogContent w="1000">
+                <Image objectFit="cover" src={product.image.url} alt="Segun Adebayo" />
+              </AlertDialogContent>
+            </AlertDialogOverlay>
+          </AlertDialog>
+        </Box>
+      </SimpleGrid>
     </>
-  )
+  );
 }

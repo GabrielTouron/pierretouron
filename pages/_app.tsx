@@ -1,19 +1,25 @@
-import '../styles/globals.css'
-import { ChakraProvider } from '@chakra-ui/react'
-import theme from './../theme'
-import { Header } from '../components/Header/Header'
-import type { AppProps } from 'next/app'
-import { ReactElement } from 'react'
+import "../styles/globals.css";
+import { ChakraProvider, Container, Box } from "@chakra-ui/react";
+import theme from "./../theme";
+import { Header } from "../components/Header/Header";
+import type { AppProps } from "next/app";
+import { ReactElement } from "react";
+import { BottomBar } from "../components/BottomBar";
+import { Footer } from "../components/Footer";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
     <ChakraProvider theme={theme}>
-      <Header />
-      <div className="container al">
-        <Component {...pageProps} />
-      </div>
+      <Box position="relative" min-height="100vh" paddingBottom="250px">
+        <Header />
+        <Container margin="20px auto" maxWidth={{ base: "90%", md: "1100px" }}>
+          <Component {...pageProps} />
+        </Container>
+        <BottomBar />
+        <Footer />
+      </Box>
     </ChakraProvider>
-  )
+  );
 }
 
-export default MyApp
+export default MyApp;
