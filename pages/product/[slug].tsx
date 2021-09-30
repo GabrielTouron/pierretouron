@@ -21,10 +21,11 @@ import { GetStaticPaths, GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import { request } from "../../api/datocms";
 import { fetchProductPageData } from "../../api/product";
-import { ProductImage } from "../../components/ProductImage/ProductImage";
 import { Product } from "../../domain/product";
 import { ButtonBack } from "../../components/ButtonBack";
 import { FocusableElement } from "@chakra-ui/utils";
+import { useRouter } from "next/router";
+import { ProductImage } from "../../components/ProductCard/ProductImage";
 
 type ProductDetailProps = {
   product: Product;
@@ -51,6 +52,7 @@ export default function ProductDetail({ product }: ProductDetailProps): ReactEle
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef() as React.MutableRefObject<FocusableElement>;
+  const router = useRouter();
 
   return (
     <>
@@ -103,7 +105,16 @@ export default function ProductDetail({ product }: ProductDetailProps): ReactEle
             </Accordion>
           </Box>
           <Center>
-            <Button onClick={() => console.log("ajouter au panier")} my="10">
+            <Button
+              className="snipcart-add-item"
+              my="10"
+              data-item-id={product.id}
+              data-item-name={product.name}
+              data-item-price={product.price}
+              data-item-url={router.pathname}
+              data-item-image={product.image.url}
+              data-item-description={product.productDetail.name}
+            >
               AJOUTER AU PANIER
             </Button>
           </Center>
