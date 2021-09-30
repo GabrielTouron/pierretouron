@@ -10,9 +10,9 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
+import { ProductImage } from ".";
 import { Product } from "../../domain/product";
 import { CircleIcon } from "../../icons/circle";
-import { ProductImage } from "../ProductImage/ProductImage";
 
 interface ProductCardProps {
   product: Product;
