@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "pierre-touron-d6705"
-  }
+    "default": "pierre-touron-d6705",
+    "dev": "pierre-touron-dev"
+  },
+  "targets": {}
 }
