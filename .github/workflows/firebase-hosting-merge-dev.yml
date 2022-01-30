@@ -5,7 +5,7 @@ name: Deploy to Firebase Hosting dev on merge
 "on":
   push:
     branches:
-      - "main"
+      - main
 env:
   NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
 jobs:
