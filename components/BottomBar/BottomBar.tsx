@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/layout";
+import { Box } from "@chakra-ui/react";
 import { useColorModeValue } from "@chakra-ui/system";
 import { useMaxScroll } from "../../hooks/useMaxScroll";
 import { Nav } from "../Nav";

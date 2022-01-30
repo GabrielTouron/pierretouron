@@ -20,6 +20,6 @@ export const HOME_PAGE_QUERY = `query MyQuery {
     createdAt
   }
   contentHomePage {
-    textPresentation(locale: fr)
+    textPresentation
   }
-}`
+}`;
