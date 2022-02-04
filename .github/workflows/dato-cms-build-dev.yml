@@ -1,7 +1,9 @@
 ---
 name: Deploy to Firebase Hosting dev on request
 
-on: repository_dispatch
+on:
+  repository_dispatch:
+    types: [deploy_dev]
 
 env:
   NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
