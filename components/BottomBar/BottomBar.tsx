@@ -23,6 +23,7 @@ export const BottomBar: React.FC = () => {
       transition="bottom 0.3s"
       zIndex="300"
     >
+      tata
       <Nav />
     </Box>
   );
