@@ -27,7 +27,7 @@ export default function Home({ product, textPresentation }: HomeProps): ReactEle
     <>
       <Flex flexDirection="column" alignItems="center">
         <Heading alignContent="center" size="2xl">
-          pierre touron test
+          pierre touron remy
         </Heading>
         <Box maxW="570px" m="30px">
           <Text textAlign="center">{textPresentation}</Text>
