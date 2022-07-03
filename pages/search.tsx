@@ -37,14 +37,38 @@ export const getStaticProps: GetStaticProps<SearchProps> = async () => {
 export default function Search({ products, productCategories }: SearchProps): ReactElement {
   const black = useColorModeValue("black", "black");
 
+  const productList = displayProduct(products);
+
+  const getNoProductMessage = () => {
+    if (productList.length === 0) {
+      return <Center>Pas d'article encore disponible dans cette catégorie</Center>;
+    }
+  };
+
+  const getProducts = () => {
+    return (
+      <SimpleGrid minChildWidth={{ base: "250px", md: "300px" }} spacing="20px">
+        {productList.map((p) => (
+          <ProductCard product={p} key={p.id} />
+        ))}
+      </SimpleGrid>
+    );
+  };
+
   return (
     <>
       <Center>
         <Heading alignContent="center">Catalogue</Heading>
       </Center>
+      <Center mt="20px">Description technique</Center>
       <Box mt="50px">
         <Flex justifyContent="space-between" direction={{ base: "column", md: "row" }}>
-          <Box margin={{ base: "auto", md: "0" }} overflowX="scroll" whiteSpace="nowrap">
+          <Box
+            margin={{ base: "auto", md: "0" }}
+            overflowX="auto"
+            whiteSpace="nowrap"
+            maxWidth="80%"
+          >
             {productCategories.map((i: ProductCategories, index: number) => (
               <Button m="5px" key={index} onClick={() => filter({ category: i.name })}>
                 {i.name}
@@ -85,13 +109,7 @@ export default function Search({ products, productCategories }: SearchProps): Re
           </Stack>
         </Flex>
       </Box>
-      <Box my="50px">
-        <SimpleGrid minChildWidth={{ base: "250px", md: "300px" }} spacing="20px">
-          {displayProduct(products).map((p) => (
-            <ProductCard product={p} key={p.id} />
-          ))}
-        </SimpleGrid>
-      </Box>
+      <Box my="50px">{productList.length == 0 ? getNoProductMessage() : getProducts()}</Box>
     </>
   );
 }

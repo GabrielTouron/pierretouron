@@ -76,9 +76,8 @@ export default function ProductDetail({ product }: ProductDetailProps): ReactEle
             {product.price} €
           </Text>
           <Box my="5">
-            {product.productTechnique.name}
-            <br />
-            {product.productDetail.name}
+            {/* Change to size prop */}
+            {product.productDetail.name} cm
           </Box>
           <Box display={{ md: "none" }}>
             <ProductImage
@@ -89,7 +88,7 @@ export default function ProductDetail({ product }: ProductDetailProps): ReactEle
             />
           </Box>
 
-          <Box marginY="30px">
+          {/* <Box marginY="30px">
             <Accordion allowMultiple>
               <AccordionItem>
                 <h2>
@@ -100,25 +99,27 @@ export default function ProductDetail({ product }: ProductDetailProps): ReactEle
                     <AccordionIcon />
                   </AccordionButton>
                 </h2>
-                <AccordionPanel pb={4}>{product.shipping}</AccordionPanel>
+                <AccordionPanel pb={4}>fefef</AccordionPanel>
               </AccordionItem>
             </Accordion>
-          </Box>
-          <Center>
-            <Button
-              className="snipcart-add-item"
-              my="10"
-              data-item-id={product.id}
-              data-item-name={product.name}
-              data-item-price={product.price}
-              data-item-url={router.pathname}
-              data-item-image={product.image.url}
-              data-item-description={product.productDetail.name}
-            >
-              AJOUTER AU PANIER
-            </Button>
-          </Center>
-          {/* Todo: Faire une composant AlertProductDialog ? */}
+          </Box> */}
+          <Heading size={"md"}>
+            Acheter directement sur place à l'atelier en envoyant un mail à p.touron@pm.me
+          </Heading>
+          {/* todo: Ouvrir une pop up avec les informations */}
+          <Button
+            className="snipcart-add-item"
+            my="10"
+            data-item-id={product.id}
+            data-item-name={product.name}
+            data-item-price={product.price}
+            data-item-url={router.pathname}
+            data-item-image={product.image.url}
+            data-item-description={product.productDetail.name}
+          >
+            Passer la commande en ligne
+          </Button>
+          {/* Todo: Faire un composant AlertProductDialog ? */}
           <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} size="3xl">
             <AlertDialogOverlay>
               <AlertDialogContent w="1000">
