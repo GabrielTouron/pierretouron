@@ -18,6 +18,9 @@ export const Nav: React.FC = () => {
         <NavButton onClick={() => router.push("/search")} ifHomeBtn={false}>
           Catalogue
         </NavButton>
+        <NavButton onClick={() => router.push("/about")} ifHomeBtn={false}>
+          À propos
+        </NavButton>
 
         {colorMode === "dark" ? (
           <NavButton onClick={toggleColorMode} ifHomeBtn={false}>
