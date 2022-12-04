@@ -1,0 +1,31 @@
+{
+  "data": {
+    "allProducts": [
+      {
+        "price": 350,
+        "name": "Antipodiste",
+        "description": "",
+        "id": "102084953",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556813-antipodiste-30x30-cm.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:33:51+01:00"
+      }
+    ],
+    "contentHomePage": {
+      "textPresentation": "« La mémoire et l’imagination vivent parfois sous le même toit » (A. Appelfeld).  Mon travail se développe comme un chemin: un chemin auquel je n’impose pas de direction particulière, je laisse venir... Puis, par décantation, le tri s’opère. Un chemin fait de souvenirs, de rêves, de peurs, des images du monde « comme il va ».  Le goût de l’étrange (de la douce à l’inquiétante étrangeté), m’amène à explorer les limites du réel, préférant l’onirisme poétique au fantastique débridé. Plus que la recherche de l’incongru et du bizarre, c’est dans la façon d’associer et de composer librement dans un espace/temps, les différents motifs de mes images, qui m’entraîne de l’autre côté du miroir. "
+    }
+  }
+}

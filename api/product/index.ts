@@ -2,6 +2,9 @@ import { request } from '../datocms'
 import { HOME_PAGE_QUERY } from './query/homePage'
 import { PRODUCT_QUERY } from './query/productPage'
 import { SEARCH_PAGE_QUERY } from './query/searchPage'
+// import env variables
+// detect if env is localhost or not
+export const isLocalhost = process.env.NODE_ENV === 'development'
 
 export const fetchHomePageData = async () => {
   const { allProducts, contentHomePage } = await request({

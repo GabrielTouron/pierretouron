@@ -1,0 +1,342 @@
+{
+  "data": {
+    "allProducts": [
+      {
+        "price": 350,
+        "name": "Antipodiste",
+        "description": "",
+        "id": "102084953",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556813-antipodiste-30x30-cm.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:33:51+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "30x30"
+        }
+      },
+      {
+        "price": 450,
+        "name": "Aplomb",
+        "description": "",
+        "id": "102084951",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556769-aplomb-40x30-cm.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:33:01+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "40x30"
+        }
+      },
+      {
+        "price": 450,
+        "name": "Calvaire",
+        "description": "",
+        "id": "102084950",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556730-calvaire-40x30-cm.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:32:26+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "40x30"
+        }
+      },
+      {
+        "price": 650,
+        "name": "Doucement",
+        "description": "",
+        "id": "102084946",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556644-doucement-50x40-cm-copie.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:30:57+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "50x40"
+        }
+      },
+      {
+        "price": 450,
+        "name": "Eau perchée",
+        "description": "",
+        "id": "102084938",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556592-eau-perchee-40x30-cm-copie.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:30:08+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "40x30"
+        }
+      },
+      {
+        "price": 650,
+        "name": "Entre deux eaux",
+        "description": "",
+        "id": "102084937",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556545-entre-deux-eaux-50x40-cm-copie.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:29:20+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "50x40"
+        }
+      },
+      {
+        "price": 450,
+        "name": "Ermitage",
+        "description": "",
+        "id": "102084935",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556484-ermitage-40x30-cm-copie.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:28:26+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "40x30"
+        }
+      },
+      {
+        "price": 450,
+        "name": "Haute terre",
+        "description": "",
+        "id": "102084934",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556423-haute-terre-40x30-cm-copie.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:27:16+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "40x30"
+        }
+      },
+      {
+        "price": 450,
+        "name": "L'oiseaulogue",
+        "description": "",
+        "id": "102084931",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556279-l-oiseaulogue-40x30-cm-copie.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:26:04+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "40x30"
+        }
+      },
+      {
+        "price": 500,
+        "name": "Point source",
+        "description": "",
+        "id": "102084890",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556210-point-source-40x40.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:23:54+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "40x40"
+        }
+      },
+      {
+        "price": 650,
+        "name": "Presqu'une île",
+        "description": "",
+        "id": "102084888",
+        "categories": [
+          {
+            "name": "Oeuvres"
+          }
+        ],
+        "image": {
+          "url": "https://www.datocms-assets.com/48750/1643556139-presqu-une-ile-50x40.jpg"
+        },
+        "state": {
+          "name": "Disponible",
+          "colorStatus": {
+            "hex": "#95DD67"
+          },
+          "available": true
+        },
+        "createdAt": "2022-01-30T16:22:55+01:00",
+        "shipping": "default value",
+        "productTechnique": {
+          "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+        },
+        "productDetail": {
+          "name": "50x40"
+        }
+      }
+    ],
+    "allProductCategories": [
+      {
+        "name": "Tout",
+        "id": "48489896",
+        "order": 0
+      },
+      {
+        "name": "Oeuvres",
+        "id": "47661698",
+        "order": 1
+      },
+      {
+        "name": "Éditions",
+        "id": "48489808",
+        "order": 2
+      }
+    ]
+  }
+}

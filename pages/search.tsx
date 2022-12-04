@@ -17,10 +17,11 @@ import {
 import { ProductCard } from "../components/ProductCard/ProductCard";
 import { GetStaticProps } from "next";
 import { ReactElement } from "react";
-import { fetchSearchPageData } from "../api/product";
+import { fetchSearchPageData, isLocalhost } from "../api/product";
 import { filter } from "../domain/product/filterProducts";
 import { displayProduct } from "../domain/product/displayProducts";
 import { Product, ProductCategories } from "../domain/product";
+import searchPage from "../api/product/query/searchPage.json";
 
 type SearchProps = {
   products: Product[];
@@ -28,7 +29,16 @@ type SearchProps = {
 };
 
 export const getStaticProps: GetStaticProps<SearchProps> = async () => {
-  const { products, productCategories } = await fetchSearchPageData();
+  if (!isLocalhost) {
+    const { products, productCategories } = await fetchSearchPageData();
+
+    return { props: { products, productCategories } };
+  }
+
+  const { data } = searchPage;
+  const products = data.allProducts;
+  const productCategories = data.allProductCategories;
+
   return {
     props: { products, productCategories },
   };
@@ -41,7 +51,7 @@ export default function Search({ products, productCategories }: SearchProps): Re
 
   const getNoProductMessage = () => {
     if (productList.length === 0) {
-      return <Center>Pas d'article encore disponible dans cette catégorie</Center>;
+      return <Center>Pas d article encore disponible dans cette catégorie</Center>;
     }
   };
 

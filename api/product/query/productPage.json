@@ -1,0 +1,33 @@
+{
+  "data": {
+    "product": {
+      "price": 350,
+      "name": "Antipodiste",
+      "description": "",
+      "id": "102084953",
+      "categories": [
+        {
+          "name": "Oeuvres"
+        }
+      ],
+      "image": {
+        "url": "https://www.datocms-assets.com/48750/1643556813-antipodiste-30x30-cm.jpg"
+      },
+      "state": {
+        "name": "Disponible",
+        "colorStatus": {
+          "hex": "#95DD67"
+        },
+        "available": true
+      },
+      "createdAt": "2022-01-30T16:33:51+01:00",
+      "shipping": "default value",
+      "productTechnique": {
+        "name": "Mine graphite sur papier aquarelle satiné, avec ajouts parfois, de gouache et de crayon bleu."
+      },
+      "productDetail": {
+        "name": "30x30"
+      }
+    }
+  }
+}

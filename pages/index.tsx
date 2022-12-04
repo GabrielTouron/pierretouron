@@ -2,10 +2,12 @@ import { Box, Flex, Text, Heading } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
-import { fetchHomePageData } from "../api/product";
+import { fetchHomePageData, isLocalhost } from "../api/product";
 import { Button } from "../components/Button";
 import { ProductCard } from "../components/ProductCard";
 import { Product } from "../domain/product";
+import homePage from "../api/product/query/homePage.json";
+//
 
 type HomeProps = {
   product: Product;
@@ -13,7 +15,14 @@ type HomeProps = {
 };
 
 export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const { product, textPresentation } = await fetchHomePageData();
+  if (!isLocalhost) {
+    const { product, textPresentation } = await fetchHomePageData();
+    return { props: { product, textPresentation } };
+  }
+
+  const { data } = homePage;
+  const product = data.allProducts[0];
+  const textPresentation = data.contentHomePage.textPresentation;
 
   return {
     props: { product, textPresentation },
