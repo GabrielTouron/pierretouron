@@ -11,11 +11,11 @@ import {
 import { useRouter } from "next/router";
 import React from "react";
 import { ProductImage } from ".";
-import { Product } from "../../domain/product";
+import { ProductsFragment } from "../../graphql/generated";
 import { CircleIcon } from "../../icons/circle";
 
 interface ProductCardProps {
-  product: Product;
+  product: ProductsFragment;
   isInHomePage?: boolean;
 }
 

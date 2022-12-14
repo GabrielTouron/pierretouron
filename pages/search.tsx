@@ -16,38 +16,48 @@ import {
 } from "@chakra-ui/react";
 import { ProductCard } from "../components/ProductCard/ProductCard";
 import { GetStaticProps } from "next";
-import { ReactElement } from "react";
-import { fetchSearchPageData, isLocalhost } from "../api/product";
+import // fetchSearchPageData,
+// isLocalhost
+"../api/product";
 import { filter } from "../domain/product/filterProducts";
 import { displayProduct } from "../domain/product/displayProducts";
-import { Product, ProductCategories } from "../domain/product";
-import searchPage from "../api/product/query/searchPage.json";
+import {
+  // Product,
+  ProductCategories,
+} from "../domain/product";
+// import searchPage from "../api/product/query/searchPage.json";
+import { SearchPageQuery, SearchPageDocument } from "../graphql/generated";
+import { request2 } from "../api";
 
-type SearchProps = {
-  products: Product[];
-  productCategories: ProductCategories[];
+type Props = {
+  result: SearchPageQuery;
 };
 
-export const getStaticProps: GetStaticProps<SearchProps> = async () => {
-  if (!isLocalhost) {
-    const { products, productCategories } = await fetchSearchPageData();
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  // if (!isLocalhost) {
+  //   const { products, productCategories } = await fetchSearchPageData();
+  //
+  //   return { props: { products, productCategories } };
+  // }
+  //
+  // const { data } = searchPage;
+  // const products = data.allProducts;
+  // const productCategories = data.allProductCategories;
+  //
+  // return {
+  //   props: { products, productCategories },
+  // };
 
-    return { props: { products, productCategories } };
-  }
-
-  const { data } = searchPage;
-  const products = data.allProducts;
-  const productCategories = data.allProductCategories;
-
-  return {
-    props: { products, productCategories },
-  };
+  const result = await request2<SearchPageQuery>(SearchPageDocument);
+  return { props: { result } };
 };
 
-export default function Search({ products, productCategories }: SearchProps): ReactElement {
+export default function Search({ result }: Props) {
+  const { allProducts, allProductCategories, productTechnique } = result;
+
   const black = useColorModeValue("black", "black");
 
-  const productList = displayProduct(products);
+  const productList = displayProduct(allProducts);
 
   const getNoProductMessage = () => {
     if (productList.length === 0) {
@@ -70,7 +80,7 @@ export default function Search({ products, productCategories }: SearchProps): Re
       <Center>
         <Heading alignContent="center">Catalogue</Heading>
       </Center>
-      <Center mt="20px">Description technique</Center>
+      <Center mt="20px">Technique utilisée : {productTechnique?.name}</Center>
       <Box mt="50px">
         <Flex justifyContent="space-between" direction={{ base: "column", md: "row" }}>
           <Box
@@ -79,7 +89,7 @@ export default function Search({ products, productCategories }: SearchProps): Re
             whiteSpace="nowrap"
             maxWidth="80%"
           >
-            {productCategories.map((i: ProductCategories, index: number) => (
+            {allProductCategories.map((i: ProductCategories, index: number) => (
               <Button m="5px" key={index} onClick={() => filter({ category: i.name })}>
                 {i.name}
               </Button>

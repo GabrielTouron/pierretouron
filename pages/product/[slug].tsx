@@ -14,51 +14,51 @@ import {
 import { GetStaticPaths, GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import { request } from "../../api/datocms";
-import { fetchProductPageData, isLocalhost } from "../../api/product";
+import { fetchProductPageData } from "../../api/product";
 import { Product } from "../../domain/product";
 import { ButtonBack } from "../../components/ButtonBack";
 import { FocusableElement } from "@chakra-ui/utils";
 import { useRouter } from "next/router";
 import { ProductImage } from "../../components/ProductCard/ProductImage";
-import productPage from "./../../api/product/query/searchPage.json";
+// import productPage from "./../../api/product/query/searchPage.json";
 
 type ProductDetailProps = {
   product: Product;
 };
 
 export const getStaticProps: GetStaticProps<ProductDetailProps> = async (context) => {
-  if (!isLocalhost) {
+  // if (!isLocalhost) {
     const product = await fetchProductPageData(context.params?.slug);
     return { props: { product } };
-  }
+  // }
 
-  const { data } = productPage;
-  const allProducts = data.allProducts as Product[];
-
-  const product = allProducts.find((p: Product) => {
-    return p.name == context.params?.slug;
-  });
-
-  return {
-    props: { product },
-  };
+  // const { data } = productPage;
+  // const allProducts = data.allProducts as Product[];
+  //
+  // const product = allProducts.find((p: Product) => {
+  //   return p.name == context.params?.slug;
+  // });
+  //
+  // return {
+  //   props: { product },
+  // };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  if (!isLocalhost) {
+  // if (!isLocalhost) {
     const { allProducts } = await request({ query: `{ allProducts { name } }` });
     return {
       paths: allProducts.map((product: Product) => `/product/${product.name}`),
       fallback: false,
     };
-  }
-  const { data } = productPage;
-  const allProducts = data.allProducts;
-
-  return {
-    paths: allProducts.map((product: Product) => `/product/${product.name}`),
-    fallback: false,
-  };
+  // }
+  // const { data } = productPage;
+  // const allProducts = data.allProducts;
+  //
+  // return {
+  //   paths: allProducts.map((product: Product) => `/product/${product.name}`),
+  //   fallback: false,
+  // };
 };
 
 export default function ProductDetail({ product }: ProductDetailProps): ReactElement {

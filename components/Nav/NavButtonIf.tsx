@@ -1,4 +1,4 @@
-import { Button, ButtonProps, useColorModeValue } from "@chakra-ui/react";
+import { Button, ButtonProps, Image, useColorModeValue } from "@chakra-ui/react";
 import React, { ReactElement } from "react";
 
 interface Props {
@@ -21,6 +21,14 @@ export const NavButton: React.FC<Props> = ({ ifHomeBtn, children, onClick, class
   if (ifHomeBtn) {
     return (
       <Button size="lg" fontWeight="bold" {...baseNavButtonProps}>
+        <Image
+          borderRadius="full"
+          boxSize="46"
+          src="https://www.datocms-assets.com/48750/1670880137-rock.jpeg"
+          alt="Dan Abramov"
+          margin="0 10px"
+        />
+
         {children}
       </Button>
     );

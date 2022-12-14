@@ -1,8 +1,5 @@
-export const SEARCH_PAGE_QUERY = `query MyQuery {
-  productTechnique {
-    name
-  }
-  allProducts {
+query ProductBySlug($slug: String) {
+  product(filter: {name: {eq: $slug}}) {
     price
     name
     description
@@ -29,9 +26,4 @@ export const SEARCH_PAGE_QUERY = `query MyQuery {
       name
     }
   }
-  allProductCategories(orderBy: order_ASC) {
-    name
-    id
-    order
-  }
-}`
+}
