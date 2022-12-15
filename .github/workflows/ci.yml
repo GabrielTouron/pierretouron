@@ -1,0 +1,13 @@
+name: CI
+on: push
+env:
+  NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: rm -f package-lock.json && npm install
+      - run: npm ci
+      - run: npm run build
+      - run: npm run export
