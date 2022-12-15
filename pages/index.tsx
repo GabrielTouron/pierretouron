@@ -2,34 +2,24 @@ import { Box, Flex, Text, Heading } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
-import { fetchHomePageData } from "../api/product";
 import { Button } from "../components/Button";
 import { ProductCard } from "../components/ProductCard";
-import { ProductsFragment } from "../graphql/generated";
-// import homePage from "../api/product/query/homePage.json";
-//
+import { request } from "../api/datocms";
+import { HomePageQuery, HomePageDocument } from "./../graphql/generated";
 
-type HomeProps = {
-  product: ProductsFragment;
-  textPresentation: string;
+type Props = {
+  result: HomePageQuery;
 };
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  // if (!isLocalhost) {
-  const { product, textPresentation } = await fetchHomePageData();
-  return { props: { product, textPresentation } };
-  // }
-
-  // const { data } = homePage;
-  // const product = data.allProducts[0];
-  // const textPresentation = data.contentHomePage.textPresentation;
-  //
-  // return {
-  //   props: { product, textPresentation },
-  // };
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const result = await request<HomePageQuery>(HomePageDocument);
+  return { props: { result } };
 };
 
-export default function Home({ product, textPresentation }: HomeProps): ReactElement {
+export default function Home({ result }: Props): ReactElement {
+  const { allProducts, contentHomePage } = result;
+  const product = allProducts[0];
+  const textPresentation = contentHomePage?.textPresentation ?? "";
   const router = useRouter();
 
   return (

@@ -16,39 +16,17 @@ import {
 } from "@chakra-ui/react";
 import { ProductCard } from "../components/ProductCard/ProductCard";
 import { GetStaticProps } from "next";
-import // fetchSearchPageData,
-// isLocalhost
-"../api/product";
 import { filter } from "../domain/product/filterProducts";
 import { displayProduct } from "../domain/product/displayProducts";
-import {
-  // Product,
-  ProductCategories,
-} from "../domain/product";
-// import searchPage from "../api/product/query/searchPage.json";
-import { SearchPageQuery, SearchPageDocument } from "../graphql/generated";
-import { request2 } from "../api";
+import { SearchPageQuery, SearchPageDocument, ProductCategoriesFragment } from "../graphql/generated";
+import { request } from "../api";
 
 type Props = {
   result: SearchPageQuery;
 };
 
 export const getStaticProps: GetStaticProps<Props> = async () => {
-  // if (!isLocalhost) {
-  //   const { products, productCategories } = await fetchSearchPageData();
-  //
-  //   return { props: { products, productCategories } };
-  // }
-  //
-  // const { data } = searchPage;
-  // const products = data.allProducts;
-  // const productCategories = data.allProductCategories;
-  //
-  // return {
-  //   props: { products, productCategories },
-  // };
-
-  const result = await request2<SearchPageQuery>(SearchPageDocument);
+  const result = await request<SearchPageQuery>(SearchPageDocument);
   return { props: { result } };
 };
 
@@ -89,7 +67,7 @@ export default function Search({ result }: Props) {
             whiteSpace="nowrap"
             maxWidth="80%"
           >
-            {allProductCategories.map((i: ProductCategories, index: number) => (
+            {allProductCategories.map((i: ProductCategoriesFragment , index: number) => (
               <Button m="5px" key={index} onClick={() => filter({ category: i.name })}>
                 {i.name}
               </Button>

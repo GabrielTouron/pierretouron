@@ -1,5 +1,5 @@
 query ProductBySlug($slug: String) {
-  product(filter: {name: {eq: $slug}}) {
+  product(filter: { name: { eq: $slug } }) {
     price
     name
     description
@@ -25,5 +25,11 @@ query ProductBySlug($slug: String) {
     productDetail {
       name
     }
+  }
+}
+
+query AllProductsName {
+  allProducts {
+    name
   }
 }

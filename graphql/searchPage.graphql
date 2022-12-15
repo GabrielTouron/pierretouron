@@ -12,6 +12,12 @@ query SearchPage {
   }
 }
 
+fragment productCategories on ProductCategoryRecord {
+  name
+  id
+  order
+}
+
 fragment products on ProductRecord {
   price
   name

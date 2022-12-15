@@ -14,54 +14,38 @@ import {
 import { GetStaticPaths, GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import { request } from "../../api/datocms";
-import { fetchProductPageData } from "../../api/product";
-import { Product } from "../../domain/product";
 import { ButtonBack } from "../../components/ButtonBack";
 import { FocusableElement } from "@chakra-ui/utils";
 import { useRouter } from "next/router";
 import { ProductImage } from "../../components/ProductCard/ProductImage";
-// import productPage from "./../../api/product/query/searchPage.json";
+import {
+  ProductBySlugDocument,
+  ProductBySlugQuery,
+  AllProductsNameDocument,
+} from "./../../graphql/generated";
 
-type ProductDetailProps = {
-  product: Product;
+type Props = {
+  result: ProductBySlugQuery;
 };
 
-export const getStaticProps: GetStaticProps<ProductDetailProps> = async (context) => {
-  // if (!isLocalhost) {
-    const product = await fetchProductPageData(context.params?.slug);
-    return { props: { product } };
-  // }
-
-  // const { data } = productPage;
-  // const allProducts = data.allProducts as Product[];
-  //
-  // const product = allProducts.find((p: Product) => {
-  //   return p.name == context.params?.slug;
-  // });
-  //
-  // return {
-  //   props: { product },
-  // };
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  const result = await request<ProductBySlugQuery>(ProductBySlugDocument, {
+    slug: context.params?.slug,
+  });
+  return { props: { result } };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  // if (!isLocalhost) {
-    const { allProducts } = await request({ query: `{ allProducts { name } }` });
-    return {
-      paths: allProducts.map((product: Product) => `/product/${product.name}`),
-      fallback: false,
-    };
-  // }
-  // const { data } = productPage;
-  // const allProducts = data.allProducts;
-  //
-  // return {
-  //   paths: allProducts.map((product: Product) => `/product/${product.name}`),
-  //   fallback: false,
-  // };
+  const { allProducts } = await request(AllProductsNameDocument);
+  return {
+    paths: allProducts.map(({ name }: { name: string }) => `/product/${name}`),
+    fallback: false,
+  };
 };
 
-export default function ProductDetail({ product }: ProductDetailProps): ReactElement {
+export default function ProductDetail({ result }: Props): ReactElement {
+  const { product } = result;
+  if (!product) return <div>Product not found</div>;
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef() as React.MutableRefObject<FocusableElement>;
