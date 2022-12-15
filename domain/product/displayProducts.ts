@@ -3,7 +3,7 @@ import { ProductsFragment } from "./../../graphql/generated";
 
 export const displayProduct = (allProducts: ProductsFragment[]): ProductsFragment[] => {
   const router = useRouter();
-  const { category, sort } = router.query; 
+  const { category, sort } = router.query;
 
   let products = category
     ? allProducts.filter((p: ProductsFragment) => p.categories[0].name === category)
@@ -11,7 +11,7 @@ export const displayProduct = (allProducts: ProductsFragment[]): ProductsFragmen
 
   products =
     sort === "price desc"
-      ? products.sort((a: ProductsFragment, b: ProductsFragment) =>  b.price - a.price)
+      ? products.sort((a: ProductsFragment, b: ProductsFragment) => b.price - a.price)
       : products;
   products =
     sort === "price asc"

@@ -1,1 +1,1 @@
-export * from './datocms'
+export * from "./datocms";

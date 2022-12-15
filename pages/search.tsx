@@ -18,7 +18,11 @@ import { ProductCard } from "../components/ProductCard/ProductCard";
 import { GetStaticProps } from "next";
 import { filter } from "../domain/product/filterProducts";
 import { displayProduct } from "../domain/product/displayProducts";
-import { SearchPageQuery, SearchPageDocument, ProductCategoriesFragment } from "../graphql/generated";
+import {
+  SearchPageQuery,
+  SearchPageDocument,
+  ProductCategoriesFragment,
+} from "../graphql/generated";
 import { request } from "../api";
 
 type Props = {
@@ -67,7 +71,7 @@ export default function Search({ result }: Props) {
             whiteSpace="nowrap"
             maxWidth="80%"
           >
-            {allProductCategories.map((i: ProductCategoriesFragment , index: number) => (
+            {allProductCategories.map((i: ProductCategoriesFragment, index: number) => (
               <Button m="5px" key={index} onClick={() => filter({ category: i.name })}>
                 {i.name}
               </Button>
