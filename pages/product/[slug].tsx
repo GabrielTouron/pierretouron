@@ -1,4 +1,7 @@
 import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Heading,
   Button,
   Box,
@@ -14,9 +17,7 @@ import {
 import { GetStaticPaths, GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import { request } from "../../api/datocms";
-import { ButtonBack } from "../../components/ButtonBack";
 import { FocusableElement } from "@chakra-ui/utils";
-import { useRouter } from "next/router";
 import { ProductImage } from "../../components/ProductCard/ProductImage";
 import {
   ProductBySlugDocument,
@@ -34,7 +35,6 @@ export const getStaticProps: GetStaticProps<Props> = async (context) => {
   });
   return { props: { result } };
 };
-
 export const getStaticPaths: GetStaticPaths = async () => {
   const { allProducts } = await request(AllProductsNameDocument);
   return {
@@ -49,11 +49,21 @@ export default function ProductDetail({ result }: Props): ReactElement {
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef() as React.MutableRefObject<FocusableElement>;
-  const router = useRouter();
+  const snipcartUrl = `${process.env.NEXT_PUBLIC_URL}/product/${product.name}/`;
 
   return (
     <>
-      <ButtonBack />
+      <Breadcrumb mb={4}>
+        <BreadcrumbItem>
+          <BreadcrumbLink href='/'>Acceuil</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink href='/search'>Catalogue</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink href='#'>{product.name}</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <SimpleGrid minChildWidth="45%" spacing="50px">
         <Box display={{ base: "none", md: "block" }}>
           <ProductImage
@@ -70,7 +80,7 @@ export default function ProductDetail({ result }: Props): ReactElement {
           </Badge>
           <Divider my="5" />
           <Text fontWeight={800} fontSize={"2xl"} my="5">
-            {product.price} €
+            {product.price.toFixed(2)} €
           </Text>
           <Box my="5">
             {/* Change to size prop */}
@@ -81,42 +91,27 @@ export default function ProductDetail({ result }: Props): ReactElement {
               src={product.image.url}
               alt="Segun Adebayo"
               onClick={() => setIsOpen(true)}
-              hasHover={true}
+              hasHover={false}
             />
           </Box>
-
-          {/* <Box marginY="30px">
-            <Accordion allowMultiple>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box flex="1" textAlign="left">
-                      Livraison
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>fefef</AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          </Box> */}
           <Heading size={"md"}>
             Acheter directement sur place à l atelier en envoyant un mail à p.touron@pm.me
           </Heading>
-          {/* todo: Ouvrir une pop up avec les informations */}
-          <Button
-            className="snipcart-add-item"
-            my="10"
-            data-item-id={product.id}
-            data-item-name={product.name}
-            data-item-price={product.price}
-            data-item-url={router.pathname}
-            data-item-image={product.image.url}
-            data-item-description={product.productDetail.name}
-          >
-            Passer la commande en ligne
-          </Button>
-          {/* Todo: Faire un composant AlertProductDialog ? */}
+
+          {product.state.name === "Disponible" ?
+            <Button
+              className="snipcart-add-item"
+              my="10"
+              data-item-id={product.name}
+              data-item-name={product.name}
+              data-item-price={product.price.toFixed(2)}
+              data-item-url={snipcartUrl}
+              data-item-image={product.image.url}
+              data-item-description={product.productDetail.name}
+            >
+              Passer la commande en ligne
+            </Button>
+            : null}
           <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} size="3xl">
             <AlertDialogOverlay>
               <AlertDialogContent w="1000">

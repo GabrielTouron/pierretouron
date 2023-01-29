@@ -12,6 +12,9 @@ import {
   MenuList,
   MenuItemOption,
   Stack,
+  BreadcrumbItem,
+  Breadcrumb,
+  BreadcrumbLink,
   useColorModeValue,
 } from "@chakra-ui/react";
 import { ProductCard } from "../components/ProductCard/ProductCard";
@@ -59,6 +62,16 @@ export default function Search({ result }: Props) {
 
   return (
     <>
+      <Breadcrumb>
+        <BreadcrumbItem>
+          <BreadcrumbLink href='/'>Acceuil</BreadcrumbLink>
+        </BreadcrumbItem>
+
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink href='/search'>Catalogue</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
+
       <Center>
         <Heading alignContent="center">Catalogue</Heading>
       </Center>

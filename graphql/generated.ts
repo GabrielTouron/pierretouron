@@ -3103,7 +3103,6 @@ export type ProductCategoriesFragment = {
 
 export type ProductsFragment = {
   __typename?: "ProductRecord";
-  price: number;
   name: string;
   description?: string | null;
   id: string;

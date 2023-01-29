@@ -1,4 +1,4 @@
-import { Box, List, ListItem, Center, useColorModeValue, Button } from "@chakra-ui/react";
+import { Box, List, Link, ListItem, Center, useColorModeValue, Button } from "@chakra-ui/react";
 import { FaFacebook, FaInstagram } from "react-icons/fa";
 
 export const Footer: React.FC = () => {
@@ -20,16 +20,20 @@ export const Footer: React.FC = () => {
         <List spacing={5}>
           <ListItem margin="0 auto">
             <Center>
-              <Button colorScheme="facebook" leftIcon={<FaFacebook />}>
-                Facebook
-              </Button>
+              <Link textDecoration="none !important" href="https://fr-fr.facebook.com/pierre.touron.5/" isExternal>
+                <Button colorScheme="facebook" leftIcon={<FaFacebook />}>
+                  Facebook
+                </Button>
+              </Link>
             </Center>
           </ListItem>
           <ListItem>
             <Center>
-              <Button colorScheme="pink" leftIcon={<FaInstagram />}>
-                Instagram
-              </Button>
+              <Link textDecoration="none !important" href="https://instagram.com/pierre_touron?igshid=YmMyMTA2M2Y=" isExternal>
+                <Button colorScheme="pink" leftIcon={<FaInstagram />}>
+                  Instagram
+                </Button>
+              </Link>
             </Center>
           </ListItem>
           <ListItem>

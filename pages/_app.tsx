@@ -7,6 +7,7 @@ import { ReactElement } from "react";
 import { BottomBar } from "../components/BottomBar";
 import { Footer } from "../components/Footer";
 import "../styles/globals.css";
+import { snipcartApiKey} from './../api/snipcart';
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
@@ -16,7 +17,7 @@ function MyApp({ Component, pageProps }: AppProps): ReactElement {
           <Header />
           <Container margin="20px auto" maxWidth={{ base: "90%", md: "1100px" }} minHeight="100vh">
             <Component {...pageProps} />
-            <Box hidden id="snipcart" data-api-key={process.env.NEXT_SNIPCART_API_TOKEN}></Box>
+            <Box hidden id="snipcart" data-api-key={snipcartApiKey}></Box>
           </Container>
           <BottomBar />
           <Footer />
