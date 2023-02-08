@@ -13,7 +13,7 @@
     "format": "npx prettier --write .",
     "lint:es": "npx eslint . --ext .ts,.tsx",
     "lint:fix": "npm run lint:es -- --fix",
-    "generate-ts-types": "DOTENV_CONFIG_PATH=./.env.local graphql-codegen --config graphql.config.yml -r dotenv/config"
+    "generate-ts-types": "DOTENV_CONFIG_PATH=./.env graphql-codegen --config graphql.config.yml -r dotenv/config"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.13",
