@@ -10,12 +10,12 @@ import {
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
-import { Product } from "../../domain/product";
+import { ProductImage } from ".";
+import { ProductsFragment } from "../../graphql/generated";
 import { CircleIcon } from "../../icons/circle";
-import { ProductImage } from "../ProductImage/ProductImage";
 
 interface ProductCardProps {
-  product: Product;
+  product: ProductsFragment;
   isInHomePage?: boolean;
 }
 

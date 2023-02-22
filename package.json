@@ -12,17 +12,24 @@
     "prepare": "husky install",
     "format": "npx prettier --write .",
     "lint:es": "npx eslint . --ext .ts,.tsx",
-    "lint:fix": "npm run lint:es -- --fix"
+    "lint:fix": "npm run lint:es -- --fix",
+    "generate-ts-types": "DOTENV_CONFIG_PATH=./.env graphql-codegen --config graphql.config.ts -r dotenv/config"
   },
   "dependencies": {
     "@chakra-ui/icons": "^1.0.13",
     "@chakra-ui/react": "^1.8.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@graphql-codegen/cli": "^2.16.1",
+    "@graphql-codegen/typed-document-node": "^2.3.10",
+    "@graphql-codegen/typescript": "^2.8.5",
+    "@graphql-codegen/typescript-operations": "^2.5.10",
+    "@graphql-typed-document-node/core": "^3.1.1",
+    "change-case-all": "^1.0.15",
     "framer-motion": "^5.6.0",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",
-    "next": "12.0.9",
+    "next": "^12.3.4",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-icons": "^4.2.0"

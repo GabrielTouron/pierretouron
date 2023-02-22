@@ -1,0 +1,47 @@
+query SearchPage {
+  productTechnique {
+    name
+  }
+  allProducts {
+    ...products
+  }
+  allProductCategories(orderBy: order_ASC) {
+    name
+    id
+    order
+  }
+}
+
+fragment productCategories on ProductCategoryRecord {
+  name
+  id
+  order
+}
+
+fragment products on ProductRecord {
+  price
+  name
+  description
+  id
+  categories {
+    name
+  }
+  image {
+    url
+  }
+  state {
+    name
+    colorStatus {
+      hex
+    }
+    available
+  }
+  createdAt
+  shipping
+  productTechnique {
+    name
+  }
+  productDetail {
+    name
+  }
+}

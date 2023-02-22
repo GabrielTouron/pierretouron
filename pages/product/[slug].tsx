@@ -1,14 +1,11 @@
 import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Heading,
   Button,
   Box,
-  Center,
   Image,
-  Accordion,
-  AccordionItem,
-  AccordionButton,
-  AccordionPanel,
-  AccordionIcon,
   Badge,
   Text,
   Divider,
@@ -20,41 +17,53 @@ import {
 import { GetStaticPaths, GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import { request } from "../../api/datocms";
-import { fetchProductPageData } from "../../api/product";
-import { ProductImage } from "../../components/ProductImage/ProductImage";
-import { Product } from "../../domain/product";
-import { ButtonBack } from "../../components/ButtonBack";
 import { FocusableElement } from "@chakra-ui/utils";
+import { ProductImage } from "../../components/ProductCard/ProductImage";
+import {
+  ProductBySlugDocument,
+  ProductBySlugQuery,
+  AllProductsNameDocument,
+} from "./../../graphql/generated";
 
-type ProductDetailProps = {
-  product: Product;
+type Props = {
+  result: ProductBySlugQuery;
 };
 
-export const getStaticProps: GetStaticProps<ProductDetailProps> = async (context) => {
-  const product = await fetchProductPageData(context.params?.slug);
-
-  return {
-    props: { product },
-  };
+export const getStaticProps: GetStaticProps<Props> = async (context) => {
+  const result = await request<ProductBySlugQuery>(ProductBySlugDocument, {
+    slug: context.params?.slug,
+  });
+  return { props: { result } };
 };
-
 export const getStaticPaths: GetStaticPaths = async () => {
-  const { allProducts } = await request({ query: `{ allProducts { name } }` });
-
+  const { allProducts } = await request(AllProductsNameDocument);
   return {
-    paths: allProducts.map((product: Product) => `/product/${product.name}`),
+    paths: allProducts.map(({ name }: { name: string }) => `/product/${name}`),
     fallback: false,
   };
 };
 
-export default function ProductDetail({ product }: ProductDetailProps): ReactElement {
+export default function ProductDetail({ result }: Props): ReactElement {
+  const { product } = result;
+  if (!product) return <div>Product not found</div>;
   const [isOpen, setIsOpen] = React.useState(false);
   const onClose = () => setIsOpen(false);
   const cancelRef = React.useRef() as React.MutableRefObject<FocusableElement>;
+  const snipcartUrl = `${process.env.NEXT_PUBLIC_URL}/product/${product.name}/`;
 
   return (
     <>
-      <ButtonBack />
+      <Breadcrumb mb={4}>
+        <BreadcrumbItem>
+          <BreadcrumbLink href='/'>Acceuil</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem>
+          <BreadcrumbLink href='/search'>Catalogue</BreadcrumbLink>
+        </BreadcrumbItem>
+        <BreadcrumbItem isCurrentPage>
+          <BreadcrumbLink href='#'>{product.name}</BreadcrumbLink>
+        </BreadcrumbItem>
+      </Breadcrumb>
       <SimpleGrid minChildWidth="45%" spacing="50px">
         <Box display={{ base: "none", md: "block" }}>
           <ProductImage
@@ -71,43 +80,38 @@ export default function ProductDetail({ product }: ProductDetailProps): ReactEle
           </Badge>
           <Divider my="5" />
           <Text fontWeight={800} fontSize={"2xl"} my="5">
-            {product.price} €
+            {product.price.toFixed(2)} €
           </Text>
           <Box my="5">
-            {product.productTechnique.name}
-            <br />
-            {product.productDetail.name}
+            {/* Change to size prop */}
+            {product.productDetail.name} cm
           </Box>
           <Box display={{ md: "none" }}>
             <ProductImage
               src={product.image.url}
               alt="Segun Adebayo"
               onClick={() => setIsOpen(true)}
-              hasHover={true}
+              hasHover={false}
             />
           </Box>
+          <Heading size={"md"}>
+            Acheter directement sur place à l atelier en envoyant un mail à p.touron@pm.me
+          </Heading>
 
-          <Box marginY="30px">
-            <Accordion allowMultiple>
-              <AccordionItem>
-                <h2>
-                  <AccordionButton>
-                    <Box flex="1" textAlign="left">
-                      Livraison
-                    </Box>
-                    <AccordionIcon />
-                  </AccordionButton>
-                </h2>
-                <AccordionPanel pb={4}>{product.shipping}</AccordionPanel>
-              </AccordionItem>
-            </Accordion>
-          </Box>
-          <Center>
-            <Button onClick={() => console.log("ajouter au panier")} my="10">
-              AJOUTER AU PANIER
+          {product.state.name === "Disponible" ?
+            <Button
+              className="snipcart-add-item"
+              my="10"
+              data-item-id={product.name}
+              data-item-name={product.name}
+              data-item-price={product.price.toFixed(2)}
+              data-item-url={snipcartUrl}
+              data-item-image={product.image.url}
+              data-item-description={product.productDetail.name}
+            >
+              Passer la commande en ligne
             </Button>
-          </Center>
-          {/* Todo: Faire une composant AlertProductDialog ? */}
+            : null}
           <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} size="3xl">
             <AlertDialogOverlay>
               <AlertDialogContent w="1000">

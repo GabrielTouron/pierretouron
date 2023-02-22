@@ -2,32 +2,31 @@ import { Box, Flex, Text, Heading } from "@chakra-ui/react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { ReactElement } from "react";
-import { fetchHomePageData } from "../api/product";
 import { Button } from "../components/Button";
 import { ProductCard } from "../components/ProductCard";
-import { Product } from "../domain/product";
+import { request } from "../api/datocms";
+import { HomePageQuery, HomePageDocument } from "./../graphql/generated";
 
-type HomeProps = {
-  product: Product;
-  textPresentation: string;
+type Props = {
+  result: HomePageQuery;
 };
 
-export const getStaticProps: GetStaticProps<HomeProps> = async () => {
-  const { product, textPresentation } = await fetchHomePageData();
-
-  return {
-    props: { product, textPresentation },
-  };
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const result = await request<HomePageQuery>(HomePageDocument);
+  return { props: { result } };
 };
 
-export default function Home({ product, textPresentation }: HomeProps): ReactElement {
+export default function Home({ result }: Props): ReactElement {
+  const { allProducts, contentHomePage } = result;
+  const product = allProducts[0];
+  const textPresentation = contentHomePage?.textPresentation ?? "";
   const router = useRouter();
 
   return (
     <>
       <Flex flexDirection="column" alignItems="center">
         <Heading alignContent="center" size="2xl">
-          pierre touron test
+          Pierre Touron
         </Heading>
         <Box maxW="570px" m="30px">
           <Text textAlign="center">{textPresentation}</Text>

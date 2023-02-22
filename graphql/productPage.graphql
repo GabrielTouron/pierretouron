@@ -1,5 +1,5 @@
-export const PRODUCT_QUERY = `query ProductBySlug($slug: String) {
-  product(filter: {name: {eq: $slug}}) {
+query ProductBySlug($slug: String) {
+  product(filter: { name: { eq: $slug } }) {
     price
     name
     description
@@ -26,4 +26,10 @@ export const PRODUCT_QUERY = `query ProductBySlug($slug: String) {
       name
     }
   }
-}`
+}
+
+query AllProductsName {
+  allProducts {
+    name
+  }
+}

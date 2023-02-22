@@ -2,7 +2,7 @@ name: Send status notification to datocms
 
 on:
   workflow_run:
-    workflows: ['Deploy to Firebase Hosting on request']
+    workflows: ["Deploy to Firebase Hosting on request"]
     types: [completed]
 jobs:
   on-success:

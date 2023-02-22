@@ -6,19 +6,24 @@ import type { AppProps } from "next/app";
 import { ReactElement } from "react";
 import { BottomBar } from "../components/BottomBar";
 import { Footer } from "../components/Footer";
+import "../styles/globals.css";
+import { snipcartApiKey} from './../api/snipcart';
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (
-    <ChakraProvider theme={theme}>
-      <Box position="relative" min-height="100vh" paddingBottom="250px">
-        <Header />
-        <Container margin="20px auto" maxWidth={{ base: "90%", md: "1100px" }}>
-          <Component {...pageProps} />
-        </Container>
-        <BottomBar />
-        <Footer />
-      </Box>
-    </ChakraProvider>
+    <>
+      <ChakraProvider theme={theme}>
+        <Box position="relative" min-height="100vh" paddingBottom="250px">
+          <Header />
+          <Container margin="20px auto" maxWidth={{ base: "90%", md: "1100px" }} minHeight="100vh">
+            <Component {...pageProps} />
+            <Box hidden id="snipcart" data-api-key={snipcartApiKey}></Box>
+          </Container>
+          <BottomBar />
+          <Footer />
+        </Box>
+      </ChakraProvider>
+    </>
   );
 }
 
