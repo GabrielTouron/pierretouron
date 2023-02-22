@@ -1,4 +1,5 @@
 import type { IGraphQLConfig, SchemaPointer } from 'graphql-config';
+import { pascalCaseWithUnderscores }  from './pascalCaseWithUnderscores';
 
 const datoCmsPath = 'https://graphql.datocms.com';
 const datoCmsPreviewPath = 'https://graphql.datocms.com/preview';
@@ -39,6 +40,9 @@ const config: IGraphQLConfig = {
         'graphql/generated.ts': {
           config: {
             strictScalars: true,
+            namingConvention: {
+              enumValues: pascalCaseWithUnderscores,
+            },
             scalars: {
               BooleanType: 'boolean',
               CustomData: 'Record<string, unknown>',

@@ -1,6 +1,6 @@
 import { pascalCase } from "change-case-all";
 
-function pascalCaseWithUnderscores(str: string): string {
+export const pascalCaseWithUnderscores = (str: string): string => {
   const result = pascalCase(str);
 
   if (!result) {
@@ -14,4 +14,3 @@ function pascalCaseWithUnderscores(str: string): string {
   return result;
 }
 
-module.exports = pascalCaseWithUnderscores;
