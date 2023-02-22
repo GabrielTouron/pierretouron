@@ -5,7 +5,7 @@ const datoCmsPreviewPath = 'https://graphql.datocms.com/preview';
 
 const schemaPreview: SchemaPointer = [
   {
-    datoCmsPreviewPath: {
+    [`${datoCmsPreviewPath}`]: {
       headers: {
         Authorization: process.env.NEXT_DATOCMS_API_TOKEN || '',
         "X-Exclude-Invalid": "true",
@@ -18,7 +18,7 @@ const schemaPreview: SchemaPointer = [
 
 const schema: SchemaPointer = [
   {
-    datoCmsPath: {
+    [`${datoCmsPath}`]: {
       headers: {
         Authorization: process.env.NEXT_DATOCMS_API_TOKEN || '',
         "X-Exclude-Invalid": "true",
@@ -30,11 +30,37 @@ const schema: SchemaPointer = [
 ];
 
 const config: IGraphQLConfig = {
-
   schema: process.env.NODE_ENV === 'development' ? schemaPreview : schema,
-
-
+  documents: './graphql/**/*.graphql',
+  extensions: {
+    codegen: {
+      overwrite: true,
+      generates: {
+        'graphql/generated.ts': {
+          config: {
+            strictScalars: true,
+            scalars: {
+              BooleanType: 'boolean',
+              CustomData: 'Record<string, unknown>',
+              Date: 'string',
+              DateTime: 'string',
+              FloatType: 'number',
+              IntType: 'number',
+              ItemId: 'string',
+              jsonField: 'unkown',
+              MetaTagAttributes: 'Record<string, string>',
+              UploadId: 'string',
+            },
+          },
+          plugins: [
+            'typescript',
+            'typescript-operations',
+            'typed-document-node',
+          ],
+        }
+      },
+    },
+  },
 };
-
 
 export default config;
