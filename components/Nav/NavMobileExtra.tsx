@@ -14,7 +14,7 @@ export const NavMobileExtra: React.FC<Props> = (props: Props) => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Flex justifyContent="center" height={height}>  
+    <Flex justifyContent="center" height={height}>
       <NavButton onClick={() => router.push("/about")} ifHomeBtn={false}>
         À propos
       </NavButton>

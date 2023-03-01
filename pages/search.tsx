@@ -64,11 +64,11 @@ export default function Search({ result }: Props) {
     <>
       <Breadcrumb>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/'>Acceuil</BreadcrumbLink>
+          <BreadcrumbLink href="/">Acceuil</BreadcrumbLink>
         </BreadcrumbItem>
 
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink href='/search'>Catalogue</BreadcrumbLink>
+          <BreadcrumbLink href="/search">Catalogue</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
 

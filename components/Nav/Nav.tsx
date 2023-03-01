@@ -1,10 +1,6 @@
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import { Stack } from "@chakra-ui/layout";
-import {
-    chakra,
-    Flex,
-    useColorMode
-} from "@chakra-ui/react";
+import { chakra, Flex, useColorMode } from "@chakra-ui/react";
 import router from "next/dist/client/router";
 import React from "react";
 import { FaShoppingCart } from "react-icons/fa";
@@ -23,9 +19,9 @@ export const Nav: React.FC = () => {
           Catalogue
         </NavButton>
         {
-        // <NavButton onClick={() => router.push("/about")} ifHomeBtn={false}>
-        //   À propos
-        // </NavButton>
+          // <NavButton onClick={() => router.push("/about")} ifHomeBtn={false}>
+          //   À propos
+          // </NavButton>
         }
 
         {colorMode === "dark" ? (

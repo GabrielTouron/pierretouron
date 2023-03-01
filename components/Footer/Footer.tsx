@@ -20,7 +20,11 @@ export const Footer: React.FC = () => {
         <List spacing={5}>
           <ListItem margin="0 auto">
             <Center>
-              <Link textDecoration="none !important" href="https://fr-fr.facebook.com/pierre.touron.5/" isExternal>
+              <Link
+                textDecoration="none !important"
+                href="https://fr-fr.facebook.com/pierre.touron.5/"
+                isExternal
+              >
                 <Button colorScheme="facebook" leftIcon={<FaFacebook />}>
                   Facebook
                 </Button>
@@ -29,7 +33,11 @@ export const Footer: React.FC = () => {
           </ListItem>
           <ListItem>
             <Center>
-              <Link textDecoration="none !important" href="https://instagram.com/pierre_touron?igshid=YmMyMTA2M2Y=" isExternal>
+              <Link
+                textDecoration="none !important"
+                href="https://instagram.com/pierre_touron?igshid=YmMyMTA2M2Y="
+                isExternal
+              >
                 <Button colorScheme="pink" leftIcon={<FaInstagram />}>
                   Instagram
                 </Button>

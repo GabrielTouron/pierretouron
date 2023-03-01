@@ -8,7 +8,10 @@ export interface GraphQLRequest {
   preview?: string;
 }
 
-const datoCMSEndpoint = process.env.NODE_ENV === "production" ? "https://graphql.datocms.com/" : "https://graphql.datocms.com/preview";
+const datoCMSEndpoint =
+  process.env.NODE_ENV === "production"
+    ? "https://graphql.datocms.com/"
+    : "https://graphql.datocms.com/preview";
 
 export const request = async <TDocument>(
   document: RequestDocument | TypedDocumentNode<TDocument, Variables>,

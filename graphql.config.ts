@@ -1,14 +1,14 @@
-import type { IGraphQLConfig, SchemaPointer } from 'graphql-config';
-import { pascalCaseWithUnderscores }  from './pascalCaseWithUnderscores';
+import type { IGraphQLConfig, SchemaPointer } from "graphql-config";
+import { pascalCaseWithUnderscores } from "./pascalCaseWithUnderscores";
 
-const datoCmsPath = 'https://graphql.datocms.com';
-const datoCmsPreviewPath = 'https://graphql.datocms.com/preview';
+const datoCmsPath = "https://graphql.datocms.com";
+const datoCmsPreviewPath = "https://graphql.datocms.com/preview";
 
 const schemaPreview: SchemaPointer = [
   {
     [`${datoCmsPreviewPath}`]: {
       headers: {
-        Authorization: process.env.NEXT_DATOCMS_API_TOKEN || '',
+        Authorization: process.env.NEXT_DATOCMS_API_TOKEN || "",
         "X-Exclude-Invalid": "true",
         "X-Included-Drafts": "true",
         "X-Environment": "main",
@@ -21,7 +21,7 @@ const schema: SchemaPointer = [
   {
     [`${datoCmsPath}`]: {
       headers: {
-        Authorization: process.env.NEXT_DATOCMS_API_TOKEN || '',
+        Authorization: process.env.NEXT_DATOCMS_API_TOKEN || "",
         "X-Exclude-Invalid": "true",
         "X-Included-Drafts": "false",
         "X-Environment": "main",
@@ -31,37 +31,33 @@ const schema: SchemaPointer = [
 ];
 
 const config: IGraphQLConfig = {
-  schema: process.env.NODE_ENV === 'development' ? schemaPreview : schema,
-  documents: './graphql/**/*.graphql',
+  schema: process.env.NODE_ENV === "development" ? schemaPreview : schema,
+  documents: "./graphql/**/*.graphql",
   extensions: {
     codegen: {
       overwrite: true,
       generates: {
-        'graphql/generated.ts': {
+        "graphql/generated.ts": {
           config: {
             strictScalars: true,
             namingConvention: {
               enumValues: pascalCaseWithUnderscores,
             },
             scalars: {
-              BooleanType: 'boolean',
-              CustomData: 'Record<string, unknown>',
-              Date: 'string',
-              DateTime: 'string',
-              FloatType: 'number',
-              IntType: 'number',
-              ItemId: 'string',
-              jsonField: 'unkown',
-              MetaTagAttributes: 'Record<string, string>',
-              UploadId: 'string',
+              BooleanType: "boolean",
+              CustomData: "Record<string, unknown>",
+              Date: "string",
+              DateTime: "string",
+              FloatType: "number",
+              IntType: "number",
+              ItemId: "string",
+              jsonField: "unkown",
+              MetaTagAttributes: "Record<string, string>",
+              UploadId: "string",
             },
           },
-          plugins: [
-            'typescript',
-            'typescript-operations',
-            'typed-document-node',
-          ],
-        }
+          plugins: ["typescript", "typescript-operations", "typed-document-node"],
+        },
       },
     },
   },

@@ -12,5 +12,4 @@ export const pascalCaseWithUnderscores = (str: string): string => {
     return `_${result}`;
   }
   return result;
-}
-
+};

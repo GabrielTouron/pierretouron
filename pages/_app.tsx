@@ -7,7 +7,7 @@ import { ReactElement } from "react";
 import { BottomBar } from "../components/BottomBar";
 import { Footer } from "../components/Footer";
 import "../styles/globals.css";
-import { snipcartApiKey} from './../api/snipcart';
+import { snipcartApiKey } from "./../api/snipcart";
 
 function MyApp({ Component, pageProps }: AppProps): ReactElement {
   return (

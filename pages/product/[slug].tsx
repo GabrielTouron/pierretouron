@@ -55,13 +55,13 @@ export default function ProductDetail({ result }: Props): ReactElement {
     <>
       <Breadcrumb mb={4}>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/'>Acceuil</BreadcrumbLink>
+          <BreadcrumbLink href="/">Acceuil</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/search'>Catalogue</BreadcrumbLink>
+          <BreadcrumbLink href="/search">Catalogue</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem isCurrentPage>
-          <BreadcrumbLink href='#'>{product.name}</BreadcrumbLink>
+          <BreadcrumbLink href="#">{product.name}</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <SimpleGrid minChildWidth="45%" spacing="50px">
@@ -98,7 +98,7 @@ export default function ProductDetail({ result }: Props): ReactElement {
             Acheter directement sur place à l atelier en envoyant un mail à p.touron@pm.me
           </Heading>
 
-          {product.state.name === "Disponible" ?
+          {product.state.name === "Disponible" ? (
             <Button
               className="snipcart-add-item"
               my="10"
@@ -111,7 +111,7 @@ export default function ProductDetail({ result }: Props): ReactElement {
             >
               Passer la commande en ligne
             </Button>
-            : null}
+          ) : null}
           <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} size="3xl">
             <AlertDialogOverlay>
               <AlertDialogContent w="1000">
