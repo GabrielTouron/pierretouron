@@ -4,7 +4,7 @@ import {
   Flex,
   Heading,
   Button,
-  SimpleGrid,
+  // SimpleGrid,
   Center,
   Menu,
   MenuButton,
@@ -17,7 +17,7 @@ import {
   BreadcrumbLink,
   useColorModeValue,
 } from "@chakra-ui/react";
-import { ProductCard } from "../components/ProductCard/ProductCard";
+// import { ProductCard } from "../components/ProductCard/ProductCard";
 import { GetStaticProps } from "next";
 import { filter } from "../domain/product/filterProducts";
 import { displayProduct } from "../domain/product/displayProducts";
