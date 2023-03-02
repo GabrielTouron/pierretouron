@@ -4,7 +4,7 @@ import {
   Flex,
   Heading,
   Button,
-  // SimpleGrid,
+  SimpleGrid,
   Center,
   Menu,
   MenuButton,
@@ -17,10 +17,10 @@ import {
   BreadcrumbLink,
   useColorModeValue,
 } from "@chakra-ui/react";
-// import { ProductCard } from "../components/ProductCard/ProductCard";
+import { ProductCard } from "../components/ProductCard/ProductCard";
 import { GetStaticProps } from "next";
 import { filter } from "../domain/product/filterProducts";
-import { displayProduct } from "../domain/product/displayProducts";
+import { useDisplayProduct } from "../domain/product/displayProducts";
 import {
   SearchPageQuery,
   SearchPageDocument,
@@ -42,7 +42,7 @@ export default function Search({ result }: Props) {
 
   const black = useColorModeValue("black", "black");
 
-  const productList = displayProduct(allProducts);
+  const productList = useDisplayProduct(allProducts);
 
   const getNoProductMessage = () => {
     if (productList.length === 0) {
@@ -51,14 +51,13 @@ export default function Search({ result }: Props) {
   };
 
   const getProducts = () => {
-  return (<div>test</div>);
-  //   return (
-  //     <SimpleGrid minChildWidth={{ base: "250px", md: "300px" }} spacing="20px">
-  //       {productList.map((p) => (
-  //         <ProductCard product={p} key={p.id} />
-  //       ))}
-  //     </SimpleGrid>
-  //   );
+    return (
+      <SimpleGrid minChildWidth={{ base: "250px", md: "300px" }} spacing="20px">
+        {productList.map((p) => (
+          <ProductCard product={p} key={p.id} />
+        ))}
+      </SimpleGrid>
+    );
   };
 
   return (
