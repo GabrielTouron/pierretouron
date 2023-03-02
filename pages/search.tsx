@@ -20,7 +20,7 @@ import {
 import { ProductCard } from "../components/ProductCard/ProductCard";
 import { GetStaticProps } from "next";
 import { filter } from "../domain/product/filterProducts";
-import { displayProduct } from "../domain/product/displayProducts";
+import { useDisplayProduct } from "../domain/product/displayProducts";
 import {
   SearchPageQuery,
   SearchPageDocument,
@@ -42,11 +42,11 @@ export default function Search({ result }: Props) {
 
   const black = useColorModeValue("black", "black");
 
-  const productList = displayProduct(allProducts);
+  const productList = useDisplayProduct(allProducts);
 
   const getNoProductMessage = () => {
     if (productList.length === 0) {
-      return <Center>Pas d article encore disponible dans cette catégorie</Center>;
+      return <Center>Pas d &apos article encore disponible dans cette catégorie</Center>;
     }
   };
 
