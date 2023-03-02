@@ -20,13 +20,14 @@ import {
 import { ProductCard } from "../components/ProductCard/ProductCard";
 import { GetStaticProps } from "next";
 import { filter } from "../domain/product/filterProducts";
-import { useDisplayProduct } from "../domain/product/displayProducts";
+import { getFilteredProducts } from "../domain/product/displayProducts";
 import {
   SearchPageQuery,
   SearchPageDocument,
   ProductCategoriesFragment,
 } from "../graphql/generated";
 import { request } from "../api";
+import React from "react";
 
 type Props = {
   result: SearchPageQuery;
@@ -42,18 +43,21 @@ export default function Search({ result }: Props) {
 
   const black = useColorModeValue("black", "black");
 
-  const productList = useDisplayProduct(allProducts);
+  const visibleProducts = React.useMemo(() => {
+    return getFilteredProducts(allProducts);
+  }, [allProducts]);
+
 
   const getNoProductMessage = () => {
-    if (productList.length === 0) {
-      return <Center>Pas d &apos article encore disponible dans cette catégorie</Center>;
+    if (visibleProducts.length === 0) {
+      return <Center>Bientôt !</Center>;
     }
   };
 
   const getProducts = () => {
     return (
       <SimpleGrid minChildWidth={{ base: "250px", md: "300px" }} spacing="20px">
-        {productList.map((p) => (
+        {visibleProducts.map((p) => (
           <ProductCard product={p} key={p.id} />
         ))}
       </SimpleGrid>
@@ -124,7 +128,7 @@ export default function Search({ result }: Props) {
           </Stack>
         </Flex>
       </Box>
-      <Box my="50px">{productList.length == 0 ? getNoProductMessage() : getProducts()}</Box>
+      <Box my="50px">{visibleProducts.length == 0 ? getNoProductMessage() : getProducts()}</Box>
     </>
   );
 }
