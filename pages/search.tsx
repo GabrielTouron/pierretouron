@@ -46,18 +46,19 @@ export default function Search({ result }: Props) {
 
   const getNoProductMessage = () => {
     if (productList.length === 0) {
-      return <Center>Pas d article encore disponible dans cette catégorie</Center>;
+      return <Center>Pas d &apos article encore disponible dans cette catégorie</Center>;
     }
   };
 
   const getProducts = () => {
-    return (
-      <SimpleGrid minChildWidth={{ base: "250px", md: "300px" }} spacing="20px">
-        {productList.map((p) => (
-          <ProductCard product={p} key={p.id} />
-        ))}
-      </SimpleGrid>
-    );
+  return (<div>test</div>);
+  //   return (
+  //     <SimpleGrid minChildWidth={{ base: "250px", md: "300px" }} spacing="20px">
+  //       {productList.map((p) => (
+  //         <ProductCard product={p} key={p.id} />
+  //       ))}
+  //     </SimpleGrid>
+  //   );
   };
 
   return (
