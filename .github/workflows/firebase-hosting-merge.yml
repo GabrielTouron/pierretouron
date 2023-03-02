@@ -9,7 +9,7 @@ name: Deploy to Firebase Hosting on merge
 env:
   NEXT_DATOCMS_API_TOKEN: ${{ secrets.NEXT_DATOCMS_API_TOKEN }}
   NODE_ENV: production
-  NEXT_SNIPCART_API_TOKEN: ${{ secrets.NEXT_SNIPCART_API_TOKEN }}
+  NEXT_SNIPCART_API_KEY: ${{ secrets.NEXT_SNIPCART_API_KEY }}
   NEXT_PUBLIC_URL: https://pierretouron.art
 jobs:
   build_and_deploy:

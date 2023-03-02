@@ -7,7 +7,7 @@ on:
 env:
   NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
   NODE_ENV: development 
-  NEXT_SNIPCART_API_TOKEN: ${{ secrets.NEXT_SNIPCART_API_TOKEN }}
+  NEXT_SNIPCART_API_KEY: ${{ secrets.NEXT_SNIPCART_API_KEY }}
 jobs:
   build_and_preview:
     if: "${{ github.event.pull_request.head.repo.full_name == github.repository }}"
