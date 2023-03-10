@@ -53,9 +53,6 @@ export const ProductCard: React.FC<ProductCardProps> = ({
         )}
         <ProductImage boxSize="300px" src={product.image.url} alt="Segun Adebayo" />
 
-        <Text color="black" fontSize="sm" textTransform="uppercase">
-          {product.categories[0].name}
-        </Text>
         <Heading color="black" fontSize="2xl" fontFamily="body" fontWeight={500}>
           {product.name}
         </Heading>
