@@ -79,15 +79,13 @@ export default function ProductDetail({ result }: Props): ReactElement {
         </Box>
         <Box>
           <Heading>{product.name}</Heading>
-          <Badge
-            my="3"
-            fontSize="1.1em"
-            colorScheme={product.state.name === "Vendu" ? "red" : "green"}
-          >
+          <Badge my="3" fontSize="1.1em" colorScheme={product.state.name === "Vendu" ? "red" : "green"}>
             {product.state.name}
           </Badge>
           <br />
-          <Text as="i">{product.productDetail.name} cm</Text>
+          <Text as='i'>
+            {product.productDetail.name} cm
+          </Text>
           <Text fontWeight={800} fontSize={"4xl"} my="5">
             {product.price.toFixed(2)} €
           </Text>
@@ -99,32 +97,36 @@ export default function ProductDetail({ result }: Props): ReactElement {
               hasHover={false}
             />
           </Box>
-          <Button
-            className="snipcart-add-item"
-            disabled={product.state.name !== "Disponible"}
-            colorScheme="green"
-            data-item-id={product.name}
-            data-item-name={product.name}
-            data-item-price={product.price.toFixed(2)}
-            data-item-max-quantity="1"
-            data-item-url={snipcartUrl}
-            data-item-image={product.image.url}
-            data-item-description={product.productDetail.name}
-            mb="2"
-          >
-            AJOUTER AU PANIER
-          </Button>
+          <Box my="2">
+            <Button
+              className="snipcart-add-item"
+              disabled={product.state.name !== "Disponible"}
+              colorScheme="green"
+              data-item-id={product.name}
+              data-item-name={product.name}
+              data-item-price={product.price.toFixed(2)}
+              data-item-max-quantity="1"
+              data-item-url={snipcartUrl}
+              data-item-image={product.image.url}
+              data-item-description={product.productDetail.name}
+              my="2"
+              mr="2"
+            >
+              AJOUTER AU PANIER
+            </Button>
+            <Button
+              my="2"
+              className="snipcart-checkout"
+            >
+              VOIR LE PANIER
+            </Button>
+          </Box>
           <br />
           {product.state.name === "Disponible" ? (
-            <Link as="i" href="https://forms.gle/mQkE8VjnkauiVoCH9" isExternal>
-              ou demande de réservation en ligne*
-              <ExternalLinkIcon mx="2px" />
+            <Link href="https://forms.gle/mQkE8VjnkauiVoCH9" isExternal >
+              ou demande de réservation en ligne*<ExternalLinkIcon mx="2px" />
             </Link>
           ) : null}
-          <br />
-          <Button mt="2" className="snipcart-checkout">
-            VOIR LE PANIER
-          </Button>
           <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} size="3xl">
             <AlertDialogOverlay>
               <AlertDialogContent w="1000">
