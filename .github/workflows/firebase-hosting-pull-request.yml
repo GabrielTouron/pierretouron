@@ -6,7 +6,7 @@ on:
   pull_request:
 env:
   NEXT_DATOCMS_API_TOKEN: ${{secrets.NEXT_DATOCMS_API_TOKEN}}
-  NODE_ENV: development 
+  NODE_ENV: development
   NEXT_PUBLIC_SNIPCART_API_KEY: ${{ secrets.NEXT_PUBLIC_SNIPCART_API_KEY }}
 jobs:
   build_and_preview:
