@@ -79,13 +79,15 @@ export default function ProductDetail({ result }: Props): ReactElement {
         </Box>
         <Box>
           <Heading>{product.name}</Heading>
-          <Badge my="3" fontSize="1.1em" colorScheme={product.state.name === "Vendu" ? "red" : "green"}>
+          <Badge
+            my="3"
+            fontSize="1.1em"
+            colorScheme={product.state.name === "Vendu" ? "red" : "green"}
+          >
             {product.state.name}
           </Badge>
           <br />
-          <Text as='i'>
-            {product.productDetail.name} cm
-          </Text>
+          <Text as="i">{product.productDetail.name} cm</Text>
           <Text fontWeight={800} fontSize={"4xl"} my="5">
             {product.price.toFixed(2)} €
           </Text>
@@ -114,15 +116,13 @@ export default function ProductDetail({ result }: Props): ReactElement {
           </Button>
           <br />
           {product.state.name === "Disponible" ? (
-            <Link as="i" href="https://forms.gle/mQkE8VjnkauiVoCH9" isExternal >
-              ou demande de réservation en ligne*<ExternalLinkIcon mx="2px" />
+            <Link as="i" href="https://forms.gle/mQkE8VjnkauiVoCH9" isExternal>
+              ou demande de réservation en ligne*
+              <ExternalLinkIcon mx="2px" />
             </Link>
           ) : null}
           <br />
-          <Button
-            mt="2"
-            className="snipcart-checkout"
-          >
+          <Button mt="2" className="snipcart-checkout">
             VOIR LE PANIER
           </Button>
           <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} size="3xl">

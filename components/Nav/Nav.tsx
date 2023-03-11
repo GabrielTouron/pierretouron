@@ -19,7 +19,7 @@ export const Nav: React.FC = () => {
 
   return (
     <Flex justifyContent="space-between" m="0 auto" p="5" maxWidth="1100px">
-      <Button size="lg" fontWeight="bold" onClick={() => router.push("/")} {...baseNavButtonProps} >
+      <Button size="lg" fontWeight="bold" onClick={() => router.push("/")} {...baseNavButtonProps}>
         <Image
           borderRadius="full"
           boxSize="46"
@@ -30,7 +30,7 @@ export const Nav: React.FC = () => {
         Acceuil
       </Button>
       <Stack spacing={2} justifyContent="center" flexDirection="row" alignItems="center" isInline>
-        <Button onClick={() => router.push("/search")} {...baseNavButtonProps} >
+        <Button onClick={() => router.push("/search")} {...baseNavButtonProps}>
           Catalogue
         </Button>
 
@@ -43,7 +43,11 @@ export const Nav: React.FC = () => {
             <MoonIcon />
           </Button>
         )}
-        <Button className="snipcart-checkout snipcart-summary" variant="ghost" colorScheme={shopButton}>
+        <Button
+          className="snipcart-checkout snipcart-summary"
+          variant="ghost"
+          colorScheme={shopButton}
+        >
           {
             <>
               <FaShoppingCart size={24} className="primary" />

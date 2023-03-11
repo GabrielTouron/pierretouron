@@ -6,8 +6,6 @@ type Props = {
   children?: string | ReactElement;
 } & ButtonProps;
 
-
-
 export const NavButton: React.FC<Props> = ({ ifHomeBtn, children, onClick, className }: Props) => {
   const navButtonColor = useColorModeValue("blackAlpha", "white");
 
@@ -34,9 +32,5 @@ export const NavButton: React.FC<Props> = ({ ifHomeBtn, children, onClick, class
     );
   }
 
-  return (
-    <Button {...baseNavButtonProps}>
-      {children}
-    </Button>
-  );
+  return <Button {...baseNavButtonProps}>{children}</Button>;
 };

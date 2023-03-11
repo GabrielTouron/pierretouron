@@ -47,15 +47,12 @@ export default function Search({ result }: Props) {
   const { category, sort } = useRouter().query;
 
   const visibleProducts = useMemo(() => {
-    return getFilteredProducts(
-      {
-        products: allProducts,
-        category,
-        sort
-      },
-    );
+    return getFilteredProducts({
+      products: allProducts,
+      category,
+      sort,
+    });
   }, [allProducts]);
-
 
   const getNoProductMessage = () => {
     if (visibleProducts.length === 0) {
