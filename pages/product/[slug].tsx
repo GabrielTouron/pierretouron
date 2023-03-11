@@ -8,17 +8,18 @@ import {
   Image,
   Badge,
   Text,
-  Divider,
   AlertDialog,
   AlertDialogOverlay,
   AlertDialogContent,
   SimpleGrid,
+  Link,
 } from "@chakra-ui/react";
 import { GetStaticPaths, GetStaticProps } from "next";
 import React, { ReactElement } from "react";
 import { request } from "../../api/datocms";
 import { FocusableElement } from "@chakra-ui/utils";
 import { ProductImage } from "../../components/ProductCard/ProductImage";
+import { ExternalLinkIcon } from "@chakra-ui/icons";
 import {
   ProductBySlugDocument,
   ProductBySlugQuery,
@@ -54,6 +55,9 @@ export default function ProductDetail({ result }: Props): ReactElement {
   return (
     <>
       <Breadcrumb mb={4}>
+        {
+          // TODO : Extract component
+        }
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Acceuil</BreadcrumbLink>
         </BreadcrumbItem>
@@ -75,17 +79,16 @@ export default function ProductDetail({ result }: Props): ReactElement {
         </Box>
         <Box>
           <Heading>{product.name}</Heading>
-          <Badge mt="3" fontSize="1.1em" colorScheme="green">
+          <Badge my="3" fontSize="1.1em" colorScheme={product.state.name === "Vendu" ? "red" : "green"}>
             {product.state.name}
           </Badge>
-          <Divider my="5" />
-          <Text fontWeight={800} fontSize={"2xl"} my="5">
+          <br />
+          <Text as='i'>
+            {product.productDetail.name} cm
+          </Text>
+          <Text fontWeight={800} fontSize={"4xl"} my="5">
             {product.price.toFixed(2)} €
           </Text>
-          <Box my="5">
-            {/* Change to size prop */}
-            {product.productDetail.name} cm
-          </Box>
           <Box display={{ md: "none" }}>
             <ProductImage
               src={product.image.url}
@@ -94,23 +97,35 @@ export default function ProductDetail({ result }: Props): ReactElement {
               hasHover={false}
             />
           </Box>
-          <Heading size={"md"}>
-            Acheter directement sur place à l atelier en envoyant un mail à p.touron@pm.me
-          </Heading>
-
-          {product.state.name === "Disponible" ? (
+          <Box my="2">
             <Button
               className="snipcart-add-item"
-              my="10"
+              disabled={product.state.name !== "Disponible"}
+              colorScheme="green"
               data-item-id={product.name}
               data-item-name={product.name}
               data-item-price={product.price.toFixed(2)}
+              data-item-max-quantity="1"
               data-item-url={snipcartUrl}
               data-item-image={product.image.url}
               data-item-description={product.productDetail.name}
+              my="2"
+              mr="2"
             >
-              Passer la commande en ligne
+              AJOUTER AU PANIER
             </Button>
+            <Button
+              my="2"
+              className="snipcart-checkout"
+            >
+              VOIR LE PANIER
+            </Button>
+          </Box>
+          <br />
+          {product.state.name === "Disponible" ? (
+            <Link href="https://forms.gle/mQkE8VjnkauiVoCH9" isExternal >
+              ou demande de réservation en ligne*<ExternalLinkIcon mx="2px" />
+            </Link>
           ) : null}
           <AlertDialog isOpen={isOpen} leastDestructiveRef={cancelRef} onClose={onClose} size="3xl">
             <AlertDialogOverlay>

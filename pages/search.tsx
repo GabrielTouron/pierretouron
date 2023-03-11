@@ -27,7 +27,8 @@ import {
   ProductCategoriesFragment,
 } from "../graphql/generated";
 import { request } from "../api";
-import React from "react";
+import { useMemo } from "react";
+import { useRouter } from "next/router";
 
 type Props = {
   result: SearchPageQuery;
@@ -43,10 +44,15 @@ export default function Search({ result }: Props) {
 
   const black = useColorModeValue("black", "black");
 
-  const visibleProducts = React.useMemo(() => {
-    return getFilteredProducts(allProducts);
-  }, [allProducts]);
+  const { category, sort } = useRouter().query;
 
+  const visibleProducts = useMemo(() => {
+    return getFilteredProducts({
+      products: allProducts,
+      category,
+      sort,
+    });
+  }, [allProducts]);
 
   const getNoProductMessage = () => {
     if (visibleProducts.length === 0) {
@@ -66,7 +72,7 @@ export default function Search({ result }: Props) {
 
   return (
     <>
-      <Breadcrumb>
+      <Breadcrumb mb="2">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Acceuil</BreadcrumbLink>
         </BreadcrumbItem>

@@ -18,6 +18,7 @@ class MyDocument extends Document {
     return (
       <Html lang="fr">
         <Head key="snipcart">
+          <link rel="icon" href="public/favicon.ico" type="image/x-icon" />
           <link rel="preconnect" href="https://app.snipcart.com" />
           <link rel="preconnect" href="https://cdn.snipcart.com" />
           <link

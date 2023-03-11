@@ -2,7 +2,6 @@ import { Box } from "@chakra-ui/react";
 import { useColorModeValue } from "@chakra-ui/system";
 import { useMaxScroll } from "../../hooks/useMaxScroll";
 import { NavMobile } from "../Nav";
-import { ArrowUpDownIcon } from "@chakra-ui/icons";
 import { Token } from "@chakra-ui/styled-system/dist/declarations/src/utils";
 import * as CSS from "csstype";
 import { useEffect, useState } from "react";
@@ -25,15 +24,13 @@ export const BottomBar: React.FC = () => {
       hidden: fmt(hidden),
     };
   };
-  const { base, revelead, hidden, contentHeight } = bottomBarConfig();
+  const { base, hidden, contentHeight } = bottomBarConfig();
   const [bottomBar, setBottomBar] = useState<Token<CSS.Property.Bottom | number, "sizes">>(base);
-  const [bottomArrow, setBottomArrow] = useState<Token<CSS.Property.Bottom | number, "sizes">>("3");
-
-  const isBottomBarRevelead = bottomBar === revelead;
+  // const [setBottomArrow] = useState<Token<CSS.Property.Bottom | number, "sizes">>("3");
 
   useEffect(() => {
     isMaxScroll ? setBottomBar(hidden) : setBottomBar(base);
-    isMaxScroll ? setBottomArrow("-100px") : setBottomArrow("3");
+    // isMaxScroll ? setBottomArrow("-100px") : setBottomArrow("3");
   }, [isMaxScroll]);
 
   return (
@@ -55,19 +52,7 @@ export const BottomBar: React.FC = () => {
       zIndex="300"
     >
       <NavMobile height={contentHeight} />
-      <ArrowUpDownIcon
-        color="primaryDark"
-        zIndex="999"
-        bottom={bottomArrow}
-        fontSize="2xl"
-        transition={"bottom 0.3s"}
-        fontWeight="bold"
-        margin="auto"
-        right="0"
-        left="0"
-        position="fixed"
-        onClick={() => (isBottomBarRevelead ? setBottomBar(base) : setBottomBar(revelead))}
-      />
+
 
       <NavMobileExtra height={contentHeight} />
     </Box>
