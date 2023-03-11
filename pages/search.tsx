@@ -75,7 +75,7 @@ export default function Search({ result }: Props) {
 
   return (
     <>
-      <Breadcrumb>
+      <Breadcrumb mb="2">
         <BreadcrumbItem>
           <BreadcrumbLink href="/">Acceuil</BreadcrumbLink>
         </BreadcrumbItem>

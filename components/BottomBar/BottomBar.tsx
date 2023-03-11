@@ -55,19 +55,6 @@ export const BottomBar: React.FC = () => {
       zIndex="300"
     >
       <NavMobile height={contentHeight} />
-      <ArrowUpDownIcon
-        color="primaryDark"
-        zIndex="999"
-        bottom={bottomArrow}
-        fontSize="2xl"
-        transition={"bottom 0.3s"}
-        fontWeight="bold"
-        margin="auto"
-        right="0"
-        left="0"
-        position="fixed"
-        onClick={() => (isBottomBarRevelead ? setBottomBar(base) : setBottomBar(revelead))}
-      />
 
       <NavMobileExtra height={contentHeight} />
     </Box>

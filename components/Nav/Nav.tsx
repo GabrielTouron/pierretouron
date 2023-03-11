@@ -30,7 +30,7 @@ export const Nav: React.FC = () => {
         Acceuil
       </Button>
       <Stack spacing={2} justifyContent="center" flexDirection="row" alignItems="center" isInline>
-        <Button onClick={() => router.push("/search")} ifHomeBtn={false} {...baseNavButtonProps} >
+        <Button onClick={() => router.push("/search")} {...baseNavButtonProps} >
           Catalogue
         </Button>
 
@@ -46,7 +46,7 @@ export const Nav: React.FC = () => {
         <Button className="snipcart-checkout snipcart-summary" variant="ghost" colorScheme={shopButton}>
           {
             <>
-              <FaShoppingCart size={20} className="primary" />
+              <FaShoppingCart size={24} className="primary" />
               <chakra.span className="snipcart-items-count" marginLeft="5px"></chakra.span>
             </>
           }
