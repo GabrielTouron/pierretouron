@@ -38,9 +38,6 @@ fragment products on ProductRecord {
   }
   createdAt
   shipping
-  productTechnique {
-    name
-  }
   productDetail {
     name
   }

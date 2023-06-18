@@ -19,9 +19,6 @@ query ProductBySlug($slug: String) {
     }
     createdAt
     shipping
-    productTechnique {
-      name
-    }
     productDetail {
       name
     }

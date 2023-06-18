@@ -89,6 +89,7 @@ export default function ProductDetail({ result }: Props): ReactElement {
           <Text fontWeight={800} fontSize={"4xl"} my="5">
             {product.price.toFixed(2)} €
           </Text>
+          <Text my="5">{product.description}</Text>
           <Box display={{ md: "none" }}>
             <ProductImage
               src={product.image.url}

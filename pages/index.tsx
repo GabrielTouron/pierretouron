@@ -26,7 +26,7 @@ export default function Home({ result }: Props): ReactElement {
     <>
       <Flex flexDirection="column" alignItems="center">
         <Heading alignContent="center" size="2xl">
-          Pierre touron
+          Pierre Touron
         </Heading>
         <Box maxW="570px" m="30px">
           <Text textAlign="center">{textPresentation}</Text>
